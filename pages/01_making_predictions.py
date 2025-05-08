@@ -213,7 +213,7 @@ def run():
 			st.stop()
 		model_path = download()
 		message_container = st.empty()
-		message_container.text("model version:TP-Transformer-1.0.20240826")
+		message_container.text("model version:TP-Transformer-1.0.20250508")
 	
 		parser_tsl = ArgumentParser(description="translate.py")
 		opts.config_opts(parser_tsl)
