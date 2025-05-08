@@ -121,7 +121,7 @@ st.set_page_config(
 
 
 def run():
-	ros_name = ['[OH]','¹O₂','O₃','SO₄∙⁻','O₂∙⁻','3DOM*','MnO₄⁻','HOCl','Fe(VI)',\
+	ros_name = ['HO∙','¹O₂','O₃','SO₄∙⁻','O₂∙⁻','3DOM*','MnO₄⁻','HOCl','Fe(VI)',\
 	'Cl∙','ClO⁻','CO₃∙⁻','HFe(VI)','Cl₂','NO₂∙','Cl₂∙⁻','C₂H₃O₃∙','Cu(III)','C₃H₅O₂∙', \
 	'NO∙','Fe(V)','Mn(III)', 'Fe(IV)','HSO₄∙','Mn(V)','ClO∙','O₂','BrO⁻',\
 	'Cr₂O₇²⁻','Br∙','IO⁻','³OM*', 'C₂H₃O₂∙','HOBr','HSO₅⁻',\
@@ -146,10 +146,12 @@ def run():
 		st.stop()
 	
 	st.subheader('Please select the ROSs that drive the pollutant degradation')
-	ros_selct=st.selectbox('What ROSs? If not sure, select "Unknown"', ( "HO∙", "SO₄∙⁻","O₃", "¹O₂",  "Fe(VI)", "O₂∙⁻", "MnO₄⁻", "ClO⁻","HClO", "Cl₂","Cl∙","CO₃∙⁻","Cl₂∙⁻","C₂H₃O₃∙", \
-	             "Cu(III)","Fe(V)",  "NO₂∙", "Mn(V)", "HSO₄∙", "O₂", "BrO⁻","NO∙", "ClO∙","Fe(IV)","Br∙", "IO⁻","C₂H₃O₂∙",\
-	             "HSO₅⁻", "ClO₂∙", "Br₂","HOBr","HO₂⁻","I∙", "NO₃∙", "IO₃∙⁻", \
-	           "Fe(III)", "S₂O₈∙⁻","HCO₃∙", "SO₃∙⁻", "Unkown"))
+	ros_selct=st.selectbox('What ROSs? If not sure, select "Unknown"', ('HO∙','¹O₂','O₃','SO₄∙⁻','O₂∙⁻','3DOM*','MnO₄⁻','HOCl','Fe(VI)',\
+	'Cl∙','ClO⁻','CO₃∙⁻','HFe(VI)','Cl₂','NO₂∙','Cl₂∙⁻','C₂H₃O₃∙','Cu(III)','C₃H₅O₂∙', \
+	'NO∙','Fe(V)','Mn(III)', 'Fe(IV)','HSO₄∙','Mn(V)','ClO∙','O₂','BrO⁻',\
+	'Cr₂O₇²⁻','Br∙','IO⁻','³OM*', 'C₂H₃O₂∙','HOBr','HSO₅⁻',\
+	'IO₄⁻','Mn₂O₂','HNCl','Br₂','ClO₂∙','NO₃∙','I∙','HO₂⁻','HCO₃∙',\
+	'S₂O₈∙⁻','SO₃∙⁻','IO₃⁻','Fe(III)','NO₂⁺','HOI' "Unkown"))
 	#st.write('You selected:', ros_selct)
 	#select = st.radio("Please specify the property or activity you want to predict", ('OH radical', 'SO4- radical', 'Koc', 'Solubility','pKd','pIC50','CCSM_H','CCSM_Na', 'Lipo','FreeSolv' ))
 	st.subheader('Which precursors generate ROSs')
