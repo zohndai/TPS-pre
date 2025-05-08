@@ -126,13 +126,13 @@ def run():
 	'NO∙','Fe(V)','Mn(III)', 'Fe(IV)','HSO₄∙','Mn(V)','ClO∙','O₂','BrO⁻',\
 	'Cr₂O₇²⁻','Br∙','IO⁻','³OM*', 'C₂H₃O₂∙','HOBr','HSO₅⁻',\
 	'IO₄⁻','Mn₂O₂','HNCl','Br₂','ClO₂∙','NO₃∙','I∙','HO₂⁻','HCO₃∙',\
-	'S₂O₈∙⁻','SO₃∙⁻','IO₃⁻','Fe(III)','NO₂⁺','HOI' "Unkown"]
+	'S₂O₈∙⁻','SO₃∙⁻','IO₃⁻','Fe(III)','NO₂⁺','HOI', 'O', "Unkown"]
 	ros_smis = ['[OH]','1O=O','O=[O+][O-]','[O]S(=O)(=O)[O-]','[O][O-]','3DOM*','O=[Mn](=O)(=O)[O-]','OCl','O=[Fe](=O)([O-])[O-]',\
 	'[Cl]','[O-]Cl','[O]C(=O)[O-]','O=[Fe](=O)([O-])O','ClCl','O=[N+][O-]','Cl[Cl-]','CC(=O)O[O]','[Cu+3]','CCC([O])=O', \
 	'[N+][O-]','O=[Fe]([O-])([O-])[O-]','[Mn+3]', '[O-][Fe]([O-])([O-])[O-]','[O]S(=O)(=O)O','[Mn+5]','[O]Cl','O=O','[O-]Br',\
 	'O=[Cr](=O)([O-])O[Cr](=O)(=O)[O-]','[Br]','[O-]I','3OM*', 'CC([O])=O','OBr','O=S(=O)([O-])OO',\
 	'[O-][I+3]([O-])([O-])[O-]','[Mn+2].[Mn+2].[O-2].[O-2]','NCl','BrBr','[O][Cl+][O-]','[O][N+](=O)[O-]','[I]','[O-]O','[O]C(=O)O',\
-	'[O]S(=O)(=O)OOS(=O)(=O)[O-]','[O]S(=O)[O-]','[O-][I+2]([O-])[O-]','[Fe+3]','O=[N+]=O','OI', '']
+	'[O]S(=O)(=O)OOS(=O)(=O)[O-]','[O]S(=O)[O-]','[O-][I+2]([O-])[O-]','[Fe+3]','O=[N+]=O','OI', 'O', '']
 	
 	acti_methd=["UV light", "Heat", "Visible light", "Microwave", "Electricity", "Ultrasound", "Sunlight", " Infrared", "No energy input"]
 	methd_tokens=["ul", "heat", "vl", "MW", "E", "US", "sul", "rl", ""]
@@ -151,7 +151,7 @@ def run():
 	'NO∙','Fe(V)','Mn(III)', 'Fe(IV)','HSO₄∙','Mn(V)','ClO∙','O₂','BrO⁻',\
 	'Cr₂O₇²⁻','Br∙','IO⁻','³OM*', 'C₂H₃O₂∙','HOBr','HSO₅⁻',\
 	'IO₄⁻','Mn₂O₂','HNCl','Br₂','ClO₂∙','NO₃∙','I∙','HO₂⁻','HCO₃∙',\
-	'S₂O₈∙⁻','SO₃∙⁻','IO₃⁻','Fe(III)','NO₂⁺','HOI', "Unkown"))
+	'S₂O₈∙⁻','SO₃∙⁻','IO₃⁻','Fe(III)','NO₂⁺','HOI', 'O', "Unkown"))
 	#st.write('You selected:', ros_selct)
 	#select = st.radio("Please specify the property or activity you want to predict", ('OH radical', 'SO4- radical', 'Koc', 'Solubility','pKd','pIC50','CCSM_H','CCSM_Na', 'Lipo','FreeSolv' ))
 	st.subheader('Which precursors generate ROSs')
