@@ -122,61 +122,7 @@ st.set_page_config(
 )
 
 
-# 设置默认的 SMILES 字符串
-default_smiles = "CCO"
-
-# 创建文本输入框，允许用户输入或修改 SMILES 字符串
-molecule = st.text_input("分子结构（SMILES）", default_smiles)
-
-# 显示 Ketcher 分子编辑器，并获取用户编辑后的 SMILES 字符串
-smiles = st_ketcher(molecule)
-
-# 显示当前的 SMILES 字符串
-st.markdown(f"**当前 SMILES：** `{smiles}`")
-
-
 def run():
-	st.markdown("### 🧪 Online Molecular Editor (JSME)")
-
-	jsme_code = """
-	<!DOCTYPE html>
-	<html>
-	  <head>
-	    <script type="text/javascript" src="https://jsme-editor.github.io/dist/jsme.nocache.js"></script>
-	  </head>
-	  <body>
-	    <div id="jsme_container" style="width:100%; height:400px;"></div>
-	    <script>
-	      let smiles_output = '';
-	      function jsmeOnLoad() {
-	        jsmeApplet = new JSApplet.JSME("jsme_container", "380px", "340px", {
-	          "options": "oldlook,star"
-	        });
-	        jsmeApplet.setAfterStructureModifiedCallback(() => {
-	          const smiles = jsmeApplet.smiles();
-	          const textarea = document.getElementById("smiles_output");
-	          if (textarea) {
-	            textarea.value = smiles;
-	          }
-	        });
-	      }
-	    </script>
-	    <textarea id="smiles_output" style="width:100%; height:40px;"></textarea>
-	  </body>
-	</html>
-	"""
-	
-	# 显示编辑器
-	components.html(jsme_code, height=450)
-	
-	# 手动输入 SMILES
-	smiles = st.text_input("⬆️ Paste SMILES from editor here:", "")
-	
-	if smiles:
-	    st.success(f"Received SMILES: {smiles}")
-
-	
-	
 	ros_name = ['HO∙','¹O₂','O₃','SO₄∙⁻','O₂∙⁻','3DOM*','MnO₄⁻','HOCl','Fe(VI)',\
 	'Cl∙','ClO⁻','CO₃∙⁻','HFe(VI)','Cl₂','NO₂∙','Cl₂∙⁻','C₂H₃O₃∙','Cu(III)','C₃H₅O₂∙', \
 	'NO∙','Fe(V)','Mn(III)', 'Fe(IV)','HSO₄∙','Mn(V)','ClO∙','O₂','BrO⁻',\
@@ -194,9 +140,23 @@ def run():
 	methd_tokens=["ul", "heat", "vl", "MW", "E", "US", "sul", "rl", ""]
 	
 	st.subheader('What pollutant?')
-	poll = st.text_input("Please input the SMILES notation for the pollutant, e.g. 'c1ccccc1' for benzene", "c1ccccc1")
+	default_mol = st.text_input("Please input the SMILES notation for the pollutant, e.g. 'c1ccccc1' for benzene", "c1ccccc1")
 	with st.expander("Show how to get SMILES of chemicals"):
 		st.write('You can get SMILES of any molecules from PubChem https://pubchem.ncbi.nlm.nih.gov/ by typing Chemical name or ACS number')
+	
+	# default_smiles = "CCO"
+
+	# # text input for manually input molecular SMILES
+	# molecule = st.text_input("molecular strcuture（SMILES）", default_smiles)
+	
+	# Ketcher  molecule editor
+	poll = st_ketcher(default_mol)
+	
+	# Showing molecule SMILES from editor
+	st.markdown(f"**current SMILES：** `{poll}`")
+
+	
+	
 	if poll =='':
 		st.warning('Provide at least one molecular compound.')
 		st.stop()
