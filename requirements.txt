@@ -1,5 +1,4 @@
 streamlit
-streamlit-ketcher
 gdown==5.2.0
 asttokens==2.0.5
 Brotli==1.0.9
