@@ -1,6 +1,6 @@
 import streamlit as st
-from streamlit_js_eval import streamlit_js_eval
-import streamlit.components.v1 as components
+import streamlit_ketcher as sk
+
 import pandas as pd
 import numpy as np
 import rdkit
@@ -123,6 +123,16 @@ st.set_page_config(
 
 
 def run():
+	st.markdown("### 🧪 Molecular Editor")
+	molfile = sk.ketcher("Draw the molecule here")
+	if molfile:
+	    mol = Chem.MolFromMolBlock(molfile)
+	    if mol:
+	        smiles_from_editor = Chem.MolToSmiles(mol)
+	        st.success(f"Extracted SMILES: {smiles_from_editor}")
+	        reactant = smiles_from_editor  # 可选：将此直接用作模型输入
+
+	
 	ros_name = ['HO∙','¹O₂','O₃','SO₄∙⁻','O₂∙⁻','3DOM*','MnO₄⁻','HOCl','Fe(VI)',\
 	'Cl∙','ClO⁻','CO₃∙⁻','HFe(VI)','Cl₂','NO₂∙','Cl₂∙⁻','C₂H₃O₃∙','Cu(III)','C₃H₅O₂∙', \
 	'NO∙','Fe(V)','Mn(III)', 'Fe(IV)','HSO₄∙','Mn(V)','ClO∙','O₂','BrO⁻',\
