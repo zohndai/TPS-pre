@@ -123,15 +123,46 @@ st.set_page_config(
 
 
 def run():
-	st.markdown("### 🧪 Molecular Editor")
-	molfile = sk.ketcher("Draw the molecule here")
-	if molfile:
-	    mol = Chem.MolFromMolBlock(molfile)
-	    if mol:
-	        smiles_from_editor = Chem.MolToSmiles(mol)
-	        st.success(f"Extracted SMILES: {smiles_from_editor}")
-	        reactant = smiles_from_editor  # 可选：将此直接用作模型输入
+	st.markdown("### 🧪 Online Molecular Editor (JSME)")
 
+	jsme_code = """
+	<!DOCTYPE html>
+	<html>
+	  <head>
+	    <script type="text/javascript" src="https://jsme-editor.github.io/dist/jsme.nocache.js"></script>
+	  </head>
+	  <body>
+	    <div id="jsme_container" style="width:100%; height:400px;"></div>
+	    <script>
+	      let smiles_output = '';
+	      function jsmeOnLoad() {
+	        jsmeApplet = new JSApplet.JSME("jsme_container", "380px", "340px", {
+	          "options": "oldlook,star"
+	        });
+	        jsmeApplet.setAfterStructureModifiedCallback(() => {
+	          const smiles = jsmeApplet.smiles();
+	          const textarea = document.getElementById("smiles_output");
+	          if (textarea) {
+	            textarea.value = smiles;
+	          }
+	        });
+	      }
+	    </script>
+	    <textarea id="smiles_output" style="width:100%; height:40px;"></textarea>
+	  </body>
+	</html>
+	"""
+	
+	# 显示编辑器
+	components.html(jsme_code, height=450)
+	
+	# 手动输入 SMILES
+	smiles = st.text_input("⬆️ Paste SMILES from editor here:", "")
+	
+	if smiles:
+	    st.success(f"Received SMILES: {smiles}")
+
+	
 	
 	ros_name = ['HO∙','¹O₂','O₃','SO₄∙⁻','O₂∙⁻','3DOM*','MnO₄⁻','HOCl','Fe(VI)',\
 	'Cl∙','ClO⁻','CO₃∙⁻','HFe(VI)','Cl₂','NO₂∙','Cl₂∙⁻','C₂H₃O₃∙','Cu(III)','C₃H₅O₂∙', \
