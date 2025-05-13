@@ -148,7 +148,7 @@ def run():
 	# molecule = st.text_input("molecular strcuture（SMILES）", default_smiles)
 	
 	# Ketcher  molecule editor
-	st.markdown(f"or manually draw the molecular structure")
+	st.markdown(f"or manually draw the molecular structure beloow:")
 	poll = st_ketcher(default_mol)
 	
 	# Showing molecule SMILES from editor
