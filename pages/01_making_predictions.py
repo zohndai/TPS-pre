@@ -1,9 +1,11 @@
 import streamlit as st
+from streamlit_js_eval import streamlit_js_eval
+import streamlit.components.v1 as components
 import pandas as pd
 import numpy as np
 import rdkit
 from rdkit import Chem
-from rdkit.Chem import AllChem
+from rdkit.Chem import AllChem, Draw
 #import cirpy
 import torch
 from rdkit.Chem import Draw
@@ -118,6 +120,61 @@ st.set_page_config(
     layout="wide",                
     initial_sidebar_state="auto"
 )
+
+st.title("🧪 分子结构绘制与 SMILES 提取 (JSME + Streamlit)")
+
+# JSME 分子编辑器 HTML 代码
+jsme_html = """
+<!DOCTYPE html>
+<html>
+<head>
+  <script type="text/javascript" src="https://peter-ertl.com/jsme/JSME_2020-12-14/jsme.nocache.js"></script>
+</head>
+<body>
+  <div id="jsme_container" style="width:500px;height:300px;"></div>
+  <script>
+    var jsmeApplet;
+    function jsmeOnLoad() {
+      jsmeApplet = new JSApplet.JSME("jsme_container", "500px", "300px");
+      jsmeApplet.setCallBack("AfterStructureModified", function() {
+        const smiles = jsmeApplet.smiles();
+        window.parent.postMessage(smiles, "*");
+      });
+    }
+  </script>
+</body>
+</html>
+"""
+
+# 用 iframe 组件嵌入 JSME 编辑器
+components.html(jsme_html, height=320)
+
+# 获取前端传回的 SMILES
+smiles = streamlit_js_eval(js_expressions="window.lastSmiles", key="get_smiles")
+
+# 监听 postMessage 事件并保存为 window.lastSmiles
+components.html("""
+<script>
+  window.addEventListener("message", (event) => {
+    window.lastSmiles = event.data;
+  });
+</script>
+""", height=0)
+
+# 展示 SMILES 和结构图
+if smiles and isinstance(smiles, str):
+    st.markdown("### 🌟 SMILES 表达式")
+    st.code(smiles, language="txt")
+
+    try:
+        mol = Chem.MolFromSmiles(smiles)
+        if mol:
+            st.image(Draw.MolToImage(mol), caption="分子结构图")
+    except:
+        st.error("无法解析该 SMILES")
+
+
+
 
 
 def run():
