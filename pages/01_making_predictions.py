@@ -143,13 +143,12 @@ def run():
 	default_mol = st.text_input("Please input the SMILES notation for the pollutant, e.g. 'c1ccccc1' for benzene", "c1ccccc1")
 	with st.expander("Show how to get SMILES of chemicals"):
 		st.write('You can get SMILES of any molecules from PubChem https://pubchem.ncbi.nlm.nih.gov/ by typing Chemical name or ACS number')
-	
-	# default_smiles = "CCO"
 
 	# # text input for manually input molecular SMILES
 	# molecule = st.text_input("molecular strcuture（SMILES）", default_smiles)
 	
 	# Ketcher  molecule editor
+	st.markdown(f"or manually draw the molecular structure")
 	poll = st_ketcher(default_mol)
 	
 	# Showing molecule SMILES from editor
