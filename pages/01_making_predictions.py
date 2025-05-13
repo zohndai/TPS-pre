@@ -122,6 +122,19 @@ st.set_page_config(
 )
 
 
+# 设置默认的 SMILES 字符串
+default_smiles = "CCO"
+
+# 创建文本输入框，允许用户输入或修改 SMILES 字符串
+molecule = st.text_input("分子结构（SMILES）", default_smiles)
+
+# 显示 Ketcher 分子编辑器，并获取用户编辑后的 SMILES 字符串
+smiles = st_ketcher(molecule)
+
+# 显示当前的 SMILES 字符串
+st.markdown(f"**当前 SMILES：** `{smiles}`")
+
+
 def run():
 	st.markdown("### 🧪 Online Molecular Editor (JSME)")
 
