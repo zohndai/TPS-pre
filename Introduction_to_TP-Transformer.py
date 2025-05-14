@@ -26,10 +26,10 @@ visitor.to_csv("visi_num.txt", index=False)
 
 TEXT1 = """
         <body style='text-align: justify; color: black;'>
-        <p>🌟	The TP-Transformer platform is powered by advanced machine learning models to assist users in predicting the transformation products of aqueous organic 
+        <p>✨The TP-Transformer platform is powered by advanced machine learning models to assist users in predicting the transformation products of aqueous organic 
 	pollutants in chemical oxidation processes. TP-Transformer is now capable of predicting both the degradation products and pathways of organic pollutants. It 
  	utilizes SMILES notation to represent chemical structures.   
-        </p> 	The TP-Transformer is built on a Transformer architecture. It accepts pollutant SMILES, oxidative species, and reaction conditions (e.g., pH) as inputs, 
+        </p>🌟TP-Transformer is built on a Transformer architecture. It accepts pollutant SMILES, oxidative species, and reaction conditions (e.g., pH) as inputs, 
 	and outputs the SMILES of the degradation products. This model can predict not only degradation intermediates but also complete degradation pathways. The 
  prediction of degradation pathways is achieved through an iterative process, where the degradation product predicted by TP-Transformer is used as input for subsequent 
  predictions. This process continues until the model predicts CO<sub>2</sub> or when the predicted chemicals remain unchanged (i.e., non-degradable), indicating the 
@@ -43,7 +43,7 @@ TEXT1 = """
 if "show_animation" not in st.session_state:
     st.session_state.show_animation = True
 
-st.header('✨Welcome to TP-Transformer!🎈')
+st.header('🎉Welcome to TP-Transformer!🎈')
 st.markdown(f'{TEXT1}', unsafe_allow_html=True)
 st.image(Image.open('predic.jpg'), width=1400, caption = 'Figure 1. The workflow that TP-Transformer makes predictions')
 
