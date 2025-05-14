@@ -43,7 +43,7 @@ TEXT1 = """
 if "show_animation" not in st.session_state:
     st.session_state.show_animation = True
 
-st.header('🌟Welcome to TP-Transformer!')
+st.header('✨Welcome to TP-Transformer!🎈')
 st.markdown(f'{TEXT1}', unsafe_allow_html=True)
 st.image(Image.open('predic.jpg'), width=1400, caption = 'Figure 1. The workflow that TP-Transformer makes predictions')
 
