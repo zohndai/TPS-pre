@@ -26,7 +26,7 @@ visitor.to_csv("visi_num.txt", index=False)
 
 TEXT1 = """
         <body style='text-align: justify; color: black;'>
-        <p>	The TP-Transformer platform is powered by advanced machine learning models to assist users in predicting the transformation products of aqueous organic 
+        <p>🌟	The TP-Transformer platform is powered by advanced machine learning models to assist users in predicting the transformation products of aqueous organic 
 	pollutants in chemical oxidation processes. TP-Transformer is now capable of predicting both the degradation products and pathways of organic pollutants. It 
  	utilizes SMILES notation to represent chemical structures.   
         </p> 	The TP-Transformer is built on a Transformer architecture. It accepts pollutant SMILES, oxidative species, and reaction conditions (e.g., pH) as inputs, 
