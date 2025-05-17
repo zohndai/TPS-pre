@@ -223,9 +223,9 @@ def run():
 		file.write(input)
 	
 	if col1.button('Get the prediction'):
-		if all([not(prec), not(ros_smi)]):
-			st.warning("At least one of 'ROSs' and 'precursors' should be given, please check your input again")
-			st.stop()
+		# if all([not(prec), not(ros_smi)]):
+		# 	st.warning("At least one of 'ROSs' and 'precursors' should be given, please check your input again")
+		# 	st.stop()
 		model_path = download()
 		message_container = st.empty()
 		message_container.text("model version:TP-Transformer-1.0.20250508")
@@ -264,10 +264,7 @@ def run():
 
 		
 		st.success("Predicted Products:")
-		#message = "This is your message tip!"
-		#background_color = "#00FF00"  # Green color
-		
-		# Use st.markdown to display the message with custom background color
+
 
 		
 		dp_smis = pd.read_csv(opt_tsl.output,header=None)
