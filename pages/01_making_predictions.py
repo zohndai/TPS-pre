@@ -280,7 +280,7 @@ def run():
 			recurr_list += smils_i
 		message_container = st.empty()
 		message_container.markdown("<br>".join([
-			f"**top{i}:** `{smis_li[i-1] + " " if not smi else ""}`" for i in range(1,11)]), 
+			f"**top{i}:** `{smis_li[i-1] + " " if not smis_li[i-1] else ""}`" for i in range(1,11)]), 
 					   unsafe_allow_html=True
 					  )
 
