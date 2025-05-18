@@ -279,11 +279,11 @@ def run():
 			smis_li[i] = ".".join([smiles for smiles in smils_i if smiles not in list_cache])
 			recurr_list += smils_i
 		message_container = st.empty()
-		for topi, smi in zip([f"top{i}" for i in range(1,11)], smis_li):
-			message_container.markdown(
-					f"**{topi}:** `{smi + " " if not smi else ""}`", 
-				unsafe_allow_html=True
-			)
+		message_container.markdown("<br>".join([
+			f"**top{i}:** `{smis_li[i-1] + " " if not smi else ""}`" for i in range(1,11)]), 
+					   unsafe_allow_html=True
+					  )
+
 		# st.markdown(",".join([f"**top{i}:** `{smis_li[i-1]}`" for i in range(1,11)])) 这行速度太慢了
 		# message_container.text(",".join([f"**top{i}:** `{smis_li[i-1]}`" for i in range(1,11)]))
 
