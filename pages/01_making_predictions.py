@@ -281,8 +281,7 @@ def run():
 		message_container = st.empty()
 		for topi, smi in zip([f"top{i}" for i in range(1,11)], smis_li):
 			message_container.markdown(
-				"<br>".join(
-					f"**{topi}:** `{smi + (" " if not smi else "")}`"), 
+					f"**{topi}:** `{smi + " " if not smi else ""}`"), 
 				unsafe_allow_html=True
 			)
 		# st.markdown(",".join([f"**top{i}:** `{smis_li[i-1]}`" for i in range(1,11)])) 这行速度太慢了
