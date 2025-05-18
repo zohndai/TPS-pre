@@ -208,6 +208,7 @@ def run():
 		cano_prec = Chem.MolToSmiles(Chem.MolFromSmiles(prec))
 	except:
 		st.warning("⚠️invalid precursors's SMILES, please check it again")
+		cano_prec = prec
 		# st.stop()
 	
 	try:
