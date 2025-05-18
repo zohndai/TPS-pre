@@ -290,8 +290,7 @@ def run():
 		# )
 
 		if "results" not in st.session_state:
-			    st.session_state.results = smis_li
-			
+			st.session_state.results = smis_li
 			message_container.markdown(
 			    "<br>".join([
 			        f"**top{i}:** `{st.session_state.results[i-1]}`" 
