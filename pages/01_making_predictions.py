@@ -204,11 +204,11 @@ def run():
 	ros_smi = ros_smis[ros_name.index(ros_selct)]
 	methd_token = methd_tokens[acti_methd.index(methd_selct)]
 	pH = "".join(str(pH_value).split("."))
-	try:
-		cano_prec = Chem.MolToSmiles(Chem.MolFromSmiles(prec))
-	except:
-		st.warning("⚠️invalid precursors's SMILES, please check it again")
-		st.stop()
+	# try:
+	# 	cano_prec = Chem.MolToSmiles(Chem.MolFromSmiles(prec))
+	# except:
+	# 	st.warning("⚠️invalid precursors's SMILES, please check it again")
+	# 	st.stop()
 	
 	try:
 		cano_pollu = Chem.MolToSmiles(Chem.MolFromSmiles(poll))
