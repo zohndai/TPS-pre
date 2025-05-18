@@ -72,6 +72,7 @@ def download():
 		    os.rename(current_file_path, new_file_path)
 	message_container.text("🚀Model is ready!")
 	return new_file_path
+	
 @st.cache_data	
 def load_test_model(opt, model_path=None):
     if model_path is None:
