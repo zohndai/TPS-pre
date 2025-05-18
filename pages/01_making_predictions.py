@@ -282,9 +282,7 @@ def run():
 		# message_container.text(",".join([f"**top{i}:** `{smis_li[i-1]}`" for i in range(1,11)]))
 
 		message_container.markdown(
-		    "<br>".join([
-		        f"**top{i}:** `{smis_li[i-1]}`" 
-		        for i in range(1,11)
+		    "<br>".join([f"**top{i}:** `{smis_li[i-1]}`" for i in range(1,11)
 		    ]),
 		    unsafe_allow_html=True
 		)
