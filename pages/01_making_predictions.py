@@ -281,7 +281,7 @@ def run():
 		# st.markdown(",".join([f"**top{i}:** `{smis_li[i-1]}`" for i in range(1,11)])) 这行速度太慢了
 		# message_container.text(",".join([f"**top{i}:** `{smis_li[i-1]}`" for i in range(1,11)]))
 
-		message_container.markdown(";".join([f"**top{i}:** `{smis_li[i-1]}`" for i in range(1,11)]), unsafe_allow_html=True)
+		message_container.markdown("<br>".join([f"**top{i}:** `{smis_li[i-1]}`" for i in range(1,11)]), unsafe_allow_html=True)
 		Fig1_col,Fig2_col,Fig3_col,Fig4_col,Fig5_col, Fig6_col, Fig7_col,Fig8_col,Fig9_col,Fig10_col, = st.columns([1]*10)
 		for i in range(1,11):
 			try:
