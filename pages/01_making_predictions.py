@@ -278,8 +278,17 @@ def run():
 			smis_li[i] = ".".join([smiles for smiles in smils_i if smiles not in list_cache])
 			recurr_list += smils_i
 		# message_container = st.empty()
-		st.markdown(",".join([f"**top{i}:** `{smis_li[i-1]}`" for i in range(1,11)]))
+		# st.markdown(",".join([f"**top{i}:** `{smis_li[i-1]}`" for i in range(1,11)]))
 		# message_container.text(",".join([f"**top{i}:** `{smis_li[i-1]}`" for i in range(1,11)]))
+		message_container = st.empty()
+		# 修改为：
+		message_container.markdown(
+		    "<br>".join([  # 使用HTML换行标签
+		        f"**top{i}:** `{smis_li[i-1]}`" 
+		        for i in range(1,11)
+		    ]),
+		    unsafe_allow_html=True  # 启用HTML解析
+		)
 		Fig1_col,Fig2_col,Fig3_col,Fig4_col,Fig5_col, Fig6_col, Fig7_col,Fig8_col,Fig9_col,Fig10_col, = st.columns([1]*10)
 		for i in range(1,11):
 			try:
