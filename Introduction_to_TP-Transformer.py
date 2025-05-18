@@ -6,7 +6,7 @@ import streamlit.components.v1 as components
 
 st.set_page_config(
     page_title="Welcome to TP-Transformer",    
-    page_icon="💧",        
+    page_icon="log.ico",        
     layout="wide",                
     initial_sidebar_state="auto" 
 )
