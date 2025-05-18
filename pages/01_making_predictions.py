@@ -1,11 +1,11 @@
 import streamlit as st
 from streamlit_ketcher import st_ketcher
-# import streamlit.components.v1 as components
+import streamlit.components.v1 as components
 import pandas as pd
 import numpy as np
 import rdkit
 from rdkit import Chem
-from rdkit.Chem import AllChem, Draw
+from rdkit.Chem import AllChem
 #import cirpy
 import torch
 from rdkit.Chem import Draw
@@ -55,12 +55,11 @@ def download():
 	destination_dir = 'models'
 	os.makedirs(destination_dir, exist_ok=True)
 	message_container = st.empty()
-	message_container.text("Downloading the models... Please wait.")
+	message_container.text("⏳Downloading the models... Please wait.")
 	#https://drive.google.com/file/d/1MTK_uL2hyS2QJrmq4HjaVCdJNLkTf55s/view?usp=drive_link
 	#1fa4ErVvXjZzbLCZzJEsQ6I9nelAR7iCu
 	#1NmXn3OhaAexvfhdTwZQxq8gbKaF_GV6u
-	fd_dict = {'1NTYBl070koP1fglDnTkLPxOOP94ehlAv':f'{name}_2025_0508'}
-	#https://drive.google.com/file/d/1NTYBl070koP1fglDnTkLPxOOP94ehlAv/view?usp=sharing
+	fd_dict = {'1NTYBl070koP1fglDnTkLPxOOP94ehlAv':f'{name}_2024_0826'}
 	for fd in fd_dict.keys():
 		fd_file = fd
 		model_name = fd_dict[fd]
@@ -71,7 +70,7 @@ def download():
 		new_file_path = f'models/{model_name}.pt'
 		if not os.path.exists(new_file_path):
 		    os.rename(current_file_path, new_file_path)
-	message_container.text("Model is ready!")
+	message_container.text("🚀Model is ready!")
 	return new_file_path
 @st.cache_data	
 def load_test_model(opt, model_path=None):
@@ -114,6 +113,7 @@ def build_translator(opt, report_score, logger=None, out_file=None):
     )
     return translator
 
+
 st.set_page_config(
     page_title="Welcome to TP-Transformer",    
     page_icon="log.ico",        
@@ -121,66 +121,56 @@ st.set_page_config(
     initial_sidebar_state="auto"
 )
 
-
+	
 def run():
-	ros_name = ['HO∙','¹O₂','O₃','SO₄∙⁻','O₂∙⁻','3DOM*','MnO₄⁻','HOCl','Fe(VI)',\
-	'Cl∙','ClO⁻','CO₃∙⁻','HFe(VI)','Cl₂','NO₂∙','Cl₂∙⁻','C₂H₃O₃∙','Cu(III)','C₃H₅O₂∙', \
-	'NO∙','Fe(V)','Mn(III)', 'Fe(IV)','HSO₄∙','Mn(V)','ClO∙','O₂','BrO⁻',\
-	'Cr₂O₇²⁻','Br∙','IO⁻','³OM*', 'C₂H₃O₂∙','HOBr','HSO₅⁻',\
-	'IO₄⁻','Mn₂O₂','HNCl','Br₂','ClO₂∙','NO₃∙','I∙','HO₂⁻','HCO₃∙',\
-	'S₂O₈∙⁻','SO₃∙⁻','IO₃⁻','Fe(III)','NO₂⁺','HOI', 'O', "Unkown"]
-	ros_smis = ['[OH]','1O=O','O=[O+][O-]','[O]S(=O)(=O)[O-]','[O][O-]','3DOM*','O=[Mn](=O)(=O)[O-]','OCl','O=[Fe](=O)([O-])[O-]',\
-	'[Cl]','[O-]Cl','[O]C(=O)[O-]','O=[Fe](=O)([O-])O','ClCl','O=[N+][O-]','Cl[Cl-]','CC(=O)O[O]','[Cu+3]','CCC([O])=O', \
-	'[N+][O-]','O=[Fe]([O-])([O-])[O-]','[Mn+3]', '[O-][Fe]([O-])([O-])[O-]','[O]S(=O)(=O)O','[Mn+5]','[O]Cl','O=O','[O-]Br',\
-	'O=[Cr](=O)([O-])O[Cr](=O)(=O)[O-]','[Br]','[O-]I','3OM*', 'CC([O])=O','OBr','O=S(=O)([O-])OO',\
-	'[O-][I+3]([O-])([O-])[O-]','[Mn+2].[Mn+2].[O-2].[O-2]','NCl','BrBr','[O][Cl+][O-]','[O][N+](=O)[O-]','[I]','[O-]O','[O]C(=O)O',\
-	'[O]S(=O)(=O)OOS(=O)(=O)[O-]','[O]S(=O)[O-]','[O-][I+2]([O-])[O-]','[Fe+3]','O=[N+]=O','OI', 'O', '']
+	ros_name = ["HO∙", "SO₄∙⁻","O₃", "¹O₂",  "Fe(VI)", "O₂∙⁻", "MnO₄⁻", "ClO⁻","HClO", "Cl₂","Cl∙","CO₃∙⁻","Cl₂∙⁻","C₂H₃O₃∙", \
+             "Cu(III)","Fe(V)",  "NO₂∙", "Mn(V)", "HSO₄∙", "O₂", "BrO⁻","NO∙", "ClO∙","Fe(IV)","Br∙", "IO⁻","C₂H₃O₂∙",\
+             "HSO₅⁻", "ClO₂∙", "Br₂","HOBr","HO₂⁻","I∙", "NO₃∙", "IO₃∙⁻", \
+           "Fe(III)", "S₂O₈∙⁻","HCO₃∙", "SO₃∙⁻","Unkown"]
+	ros_smis = ['[OH]','[O]S(=O)(=O)[O-]','O=[O+][O-]','OO1','O=[Fe](=O)([O-])[O-]','[O][O-]','O=[Mn](=O)(=O)[O-]','[O-]Cl','OCl','ClCl','[Cl]','[O]C(=O)[O-]','Cl[Cl-]',\
+	 'CC(=O)O[O]','[Cu+3]','O=[Fe]([O-])([O-])[O-]','[O]N=O','O=[Mn]([O-])([O-])[O-]','[O]S(=O)(=O)O','O=O','[O-]Br','[N]=O','[O]Cl','[O-][Fe]([O-])([O-])[O-]','[Br]',\
+	 '[O-]I','CC([O])=O','O=S(=O)([O-])OO','[O][Cl+][O-]','BrBr','OBr','[O-]O','[I]','[O][N+](=O)[O-]','[O-][I+2]([O-])[O-]','[Fe+3]','[O]S(=O)(=O)OOS(=O)(=O)[O-]',\
+	 '[O]C(=O)O','[O]S(=O)[O-]','']
 	
-	acti_methd=["UV light", "Heat", "Visible light", "Microwave", "Electricity", "Ultrasound", "Sunlight", " Infrared", "No energy input"]
-	methd_tokens=["ul", "heat", "vl", "MW", "E", "US", "sul", "rl", ""]
+	acti_methd=["UV light", "Heat", "Visible light", "Microwave", "Electricity", "Ultrasound", "Sunlight", "No energy input"]
+	methd_tokens=["UV", "heat", "VL", "MW", "E", "US", "hv", ""]
 	
-	st.subheader('What pollutant?')
+	st.subheader('🔬 What pollutant?')
 	default_mol = st.text_input("Please input the SMILES notation for the pollutant, e.g. 'c1ccccc1' for benzene", "c1ccccc1")
-	with st.expander("Show how to get SMILES of chemicals"):
+	with st.expander("📌 Show how to get SMILES of chemicals"):
 		st.write('You can get SMILES of any molecules from PubChem https://pubchem.ncbi.nlm.nih.gov/ by typing Chemical name or ACS number')
 
-	# # text input for manually input molecular SMILES
+
 	# molecule = st.text_input("molecular strcuture（SMILES）", default_smiles)
 	
-	# Ketcher  molecule editor
-	st.markdown(f"Or manually draw the target pollutant below:")
-	poll = st_ketcher(default_mol)
+	st.markdown(f"✍ Or manually draw the target pollutant below:")
+	poll = st_ketcher(default_mol, height=600)
 	
 	# Showing molecule SMILES from editor
-	st.markdown(f"**current SMILES：** `{poll}`")
-
-	
+	st.markdown(f"**Current SMILES：** `{poll}`")
 	
 	if poll =='':
-		st.warning('Provide at least one molecular compound.')
+		st.warning('⚠️ Provide at least one molecular compound.')
 		st.stop()
 	
-	st.subheader('Please select the ROSs that drive the pollutant degradation')
-	ros_selct=st.selectbox('What ROSs? If not sure, select "Unknown"', ('HO∙','¹O₂','O₃','SO₄∙⁻','O₂∙⁻','3DOM*','MnO₄⁻','HOCl','Fe(VI)',\
-	'Cl∙','ClO⁻','CO₃∙⁻','HFe(VI)','Cl₂','NO₂∙','Cl₂∙⁻','C₂H₃O₃∙','Cu(III)','C₃H₅O₂∙', \
-	'NO∙','Fe(V)','Mn(III)', 'Fe(IV)','HSO₄∙','Mn(V)','ClO∙','O₂','BrO⁻',\
-	'Cr₂O₇²⁻','Br∙','IO⁻','³OM*', 'C₂H₃O₂∙','HOBr','HSO₅⁻',\
-	'IO₄⁻','Mn₂O₂','HNCl','Br₂','ClO₂∙','NO₃∙','I∙','HO₂⁻','HCO₃∙',\
-	'S₂O₈∙⁻','SO₃∙⁻','IO₃⁻','Fe(III)','NO₂⁺','HOI', 'O', "Unkown"))
+	st.subheader('💥Please select the ROSs that drive the pollutant degradation')
+	ros_selct=st.selectbox('What ROSs? If not sure, select "Unknown"', ( "HO∙", "SO₄∙⁻","O₃", "¹O₂",  "Fe(VI)", "O₂∙⁻", "MnO₄⁻", "ClO⁻","HClO", "Cl₂","Cl∙","CO₃∙⁻","Cl₂∙⁻","C₂H₃O₃∙", \
+	             "Cu(III)","Fe(V)",  "NO₂∙", "Mn(V)", "HSO₄∙", "O₂", "BrO⁻","NO∙", "ClO∙","Fe(IV)","Br∙", "IO⁻","C₂H₃O₂∙",\
+	             "HSO₅⁻", "ClO₂∙", "Br₂","HOBr","HO₂⁻","I∙", "NO₃∙", "IO₃∙⁻", \
+	           "Fe(III)", "S₂O₈∙⁻","HCO₃∙", "SO₃∙⁻", "Unkown"))
 	#st.write('You selected:', ros_selct)
 	#select = st.radio("Please specify the property or activity you want to predict", ('OH radical', 'SO4- radical', 'Koc', 'Solubility','pKd','pIC50','CCSM_H','CCSM_Na', 'Lipo','FreeSolv' ))
-	st.subheader('Which precursors generate ROSs')
+	st.subheader('🧪 Which precursors generate ROSs')
 	prec = st.text_input("Please enter the SMILES notation for the precursor(s), including the parent oxidant and any activator (if applicable), e.g. 'OO.[Fe+2]' for the fenton reagent H2O2/Fe2+, if not sure, leave this field blank", "OO.[Fe+2]")
 	#if prec !='':
 		#st.warning('Invalid chemical name or CAS number of precursors, please check it again or imput SMILES')
 		#st.stop()
 	
-	st.subheader("What energy input")
-	methd_selct=st.selectbox("Please select the input energy for the ROSs generation",("UV light", "Heat", "Visible light", \
-		       "Microwave", "Electricity", "Ultrasound", "Sunlight", " Infrared", "No energy input"),7)
+	st.subheader("⚡What energy input")
+	methd_selct=st.selectbox("Please select the input energy for the ROSs generation",("UV light", "Heat", "Visible light", "Microwave", "Electricity", "Ultrasound", "Sunlight", "No energy input"),7)
 	
-	st.subheader('Please input the reaction pH for pollutant degradation')
-	pH_value = st.text_input("Keep two decimal places","3.00")
+	# st.subheader('Please input the reaction pH for pollutant degradation')
+	# pH_value = st.text_input("Keep two decimal places","3.00")
 
 	
 
@@ -197,8 +187,8 @@ def run():
 	
 	#pH_value = "%.2f"%(st.select_slider('Select a pH value:',options=[round(x * 0.01, 2) for x in range(0000, 1401)], value=3.00))
 	
-	# pH_value = "{:.2f}".format(st.select_slider('Select a pH value:',options=[round(x * 0.01, 2) for x in range(0000, 1401)], value=3.00))
-	# st.write('Selected pH value:', pH_value)
+	pH_value = "{:.2f}".format(st.select_slider('🌡️ Select a pH value:',options=[round(x * 0.01, 2) for x in range(0000, 1401)], value=3.00))
+	st.write('Selected pH value:', pH_value)
 
 	col1, col2, col3, col4= st.columns([2,2,1,1])
 	ros_smi = ros_smis[ros_name.index(ros_selct)]
@@ -207,13 +197,13 @@ def run():
 	try:
 		cano_prec = Chem.MolToSmiles(Chem.MolFromSmiles(prec))
 	except:
-		st.warning("invalid precursors's SMILES, please check it again")
+		st.warning("⚠️invalid precursors's SMILES, please check it again")
 		st.stop()
 	
 	try:
 		cano_pollu = Chem.MolToSmiles(Chem.MolFromSmiles(poll))
 	except:
-		st.warning("invalid pollutant SMILES, please check it again")
+		st.warning("⚠️invalid pollutant SMILES, please check it again")
 		st.stop()
 	reactant = cano_pollu + "." + ros_smi
 	
@@ -223,12 +213,12 @@ def run():
 		file.write(input)
 	
 	if col1.button('Get the prediction'):
-		# if all([not(prec), not(ros_smi)]):
-		# 	st.warning("At least one of 'ROSs' and 'precursors' should be given, please check your input again")
-		# 	st.stop()
+		if all([not(prec), not(ros_smi)]):
+			st.warning("⚠️At least one of 'ROSs' and 'precursors' should be given, please check your input again")
+			st.stop()
 		model_path = download()
 		message_container = st.empty()
-		message_container.text("model version:TP-Transformer-1.0.20250508")
+		message_container.text("🤖model version:TP-Transformer-1.0.20240826")
 	
 		parser_tsl = ArgumentParser(description="translate.py")
 		opts.config_opts(parser_tsl)
@@ -265,8 +255,6 @@ def run():
 		
 		st.success("Predicted Products:")
 
-
-		
 		dp_smis = pd.read_csv(opt_tsl.output,header=None)
 		smis_li=[".".join(list(set(("".join(dp_smi.split(" "))).split(".")))) for dp_smi in dp_smis[0]]
 		if len(smis_li) != 10:
@@ -278,10 +266,9 @@ def run():
 			smis_li[i] = ".".join([smiles for smiles in smils_i if smiles not in list_cache])
 			recurr_list += smils_i
 		message_container = st.empty()
-		# st.markdown(",".join([f"**top{i}:** `{smis_li[i-1]}`" for i in range(1,11)])) 这行速度太慢了
-		# message_container.text(",".join([f"**top{i}:** `{smis_li[i-1]}`" for i in range(1,11)]))
-
-		message_container.markdown("<br>".join([f"**top{i}:** `{smis_li[i-1]}`" for i in range(1,11)]), unsafe_allow_html=True)
+		message_container.markdown(",".join([f"top{i}: `{smis_li[i-1]}`" for i in range(1,11)]), unsafe_allow_html=True)
+		# st.markdown(",".join([f"**top{i}:** `{smis_li[i-1]}`" for i in range(1,11)]))
+		# message_container.markdown(";".join([f"**top{i}:** `{smis_li[i-1]}`" for i in range(1,11)]), unsafe_allow_html=True)
 		Fig1_col,Fig2_col,Fig3_col,Fig4_col,Fig5_col, Fig6_col, Fig7_col,Fig8_col,Fig9_col,Fig10_col, = st.columns([1]*10)
 		for i in range(1,11):
 			try:
@@ -292,8 +279,8 @@ def run():
 				eval(f"Fig{i}_col").image(Image.open("invalsmi.jpg"), caption = f'top{i}')
 			st.cache_data.clear()
 			st.cache_resource.clear()
+
 	return
 
 if __name__ == "__main__":
 	run()
-
