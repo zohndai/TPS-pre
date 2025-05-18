@@ -279,7 +279,7 @@ def run():
 			recurr_list += smils_i
 		message_container = st.empty()
 		
-		message_container.text(",".join([f"top{i}:{smis_li[i-1]}" for i in range(1,11)]))
+		message_container.text(",".join([f"**top{i}:** `{smis_li[i-1]}`" for i in range(1,11)]))
 		Fig1_col,Fig2_col,Fig3_col,Fig4_col,Fig5_col, Fig6_col, Fig7_col,Fig8_col,Fig9_col,Fig10_col, = st.columns([1]*10)
 		for i in range(1,11):
 			try:
@@ -287,7 +287,7 @@ def run():
 				exec(f"top{i}_fig = Draw.MolToImage(Chem.MolFromSmiles(smis_li[i-1]))")
 				eval(f"Fig{i}_col").image(eval(f"top{i}_fig"), caption = f'top{i}')
 			except:
-				eval(f"Fig{i}_col").image(Image.open("invalsmi.jpg"), caption = f'top{i}')
+				eval(f"Fig{i}_col").image(Image.open("invalsmi.jpg"), caption = f'**top{i}**')
 			st.cache_data.clear()
 			st.cache_resource.clear()
 	return
