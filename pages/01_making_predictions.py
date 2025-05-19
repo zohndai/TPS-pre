@@ -284,11 +284,17 @@ def run():
 					   unsafe_allow_html=True
 					  )
 
+		confid = pd.read_csv(
+			opt_tsl.output.replace(".txt", "_confidence.csv"),
+			header=None, names=["confidence"]
+		)
+
 		# st.markdown(",".join([f"**top{i}:** `{smis_li[i-1]}`" for i in range(1,11)])) 这行速度太慢了
 		# message_container.text(",".join([f"**top{i}:** `{smis_li[i-1]}`" for i in range(1,11)]))
 
 		
 		Fig1_col,Fig2_col,Fig3_col,Fig4_col,Fig5_col, Fig6_col, Fig7_col,Fig8_col,Fig9_col,Fig10_col, = st.columns([1]*10)
+		conf1_col,conf2_col,conf3_col,conf4_col,conf5_col, confg6_col, conf7_col,conf8_col,conf9_col,conf10_col, = st.columns([1]*10)
 		for i in range(1,11):
 			try:
 				cano_pro = Chem.MolToSmiles(Chem.MolFromSmiles(smis_li[i-1]))
@@ -296,6 +302,8 @@ def run():
 				eval(f"Fig{i}_col").image(eval(f"top{i}_fig"), caption = f'top{i}')
 			except:
 				eval(f"Fig{i}_col").image(Image.open("invalsmi.jpg"), caption = f'top{i}')
+			eval(f"conf{i}_col").text(f"confidence:{confid["confidence"][i-1]}")
+		
 			st.cache_data.clear()
 			st.cache_resource.clear()
 	return
