@@ -77,8 +77,7 @@ class TranslationBuilder(object):
         confidence = []
         for i in pred_score:
             for j in i:
-                confidence.append(np.exp(j.tolist()))
-
+                confidence.append(np.exp(j.tolist() / 5))
         
         #print("attn: {}".format(attn))
         #print("align: {}".format(align))
@@ -125,9 +124,9 @@ class TranslationBuilder(object):
             )
             translations.append(translation)
         #print("confidence: {}, type:{}".format(pred_score, type(pred_score)))
-        print("confidence: {}, type:{}".format(confidence, type(confidence)))
+        #print("confidence: {}, type:{}".format(confidence, type(confidence)))
 
-        return translations
+        return translations, confidence
 
 
 class Translation(object):
