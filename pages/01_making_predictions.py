@@ -302,7 +302,7 @@ def run():
 				eval(f"Fig{i}_col").image(eval(f"top{i}_fig"), caption = f'top{i}')
 			except:
 				eval(f"Fig{i}_col").image(Image.open("invalsmi.jpg"), caption = f'top{i}')
-			eval(f"conf{i}_col").text(f"confidence:{confid["confidence"][i-1]}")
+			eval(f"conf{i}_col").text(f"confidence:{confid["confidence"][i-1]:5f}")
 		
 			st.cache_data.clear()
 			st.cache_resource.clear()
