@@ -8,7 +8,6 @@
           things to users(i.e. how to do it). Also see train.py(one of the
           users of this library) for the strategy things we do.
 """
-
 import pandas as pd
 
 import torch
