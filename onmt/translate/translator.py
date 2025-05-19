@@ -397,7 +397,7 @@ class Translator(object):
             translations, confidence = xlation_builder.from_batch(batch_data)
             conf_dt = pd.DataFrame(confidence)
             conf_savepath = self.opt.output.replace(".txt", "_confidence.csv")
-            conf_dt.to_csv(conf_savepath, mode="a", header=False, index=False)
+            conf_dt.to_csv(conf_savepath, header=False, index=False)
             for trans in translations:
                 all_scores += [trans.pred_scores[:self.n_best]]
 
