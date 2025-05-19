@@ -59,6 +59,7 @@ def download():
 	#https://drive.google.com/file/d/1MTK_uL2hyS2QJrmq4HjaVCdJNLkTf55s/view?usp=drive_link
 	#1fa4ErVvXjZzbLCZzJEsQ6I9nelAR7iCu
 	#1NmXn3OhaAexvfhdTwZQxq8gbKaF_GV6u
+	# https://drive.google.com/file/d//view?usp=sharing
 	fd_dict = {'1NTYBl070koP1fglDnTkLPxOOP94ehlAv':f'{name}_2025_0508'}
 	#https://drive.google.com/file/d/1NTYBl070koP1fglDnTkLPxOOP94ehlAv/view?usp=sharing
 	for fd in fd_dict.keys():
