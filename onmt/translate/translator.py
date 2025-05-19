@@ -6,7 +6,7 @@ import os
 import time
 import numpy as np
 from itertools import count, zip_longest
-
+import pandas as pd
 import torch
 
 import onmt.model_builder
@@ -247,7 +247,7 @@ class Translator(object):
 
         src_reader = inputters.str2reader[opt.data_type].from_opt(opt)
         tgt_reader = inputters.str2reader["text"].from_opt(opt)
-        return cls(
+        obj = cls(
             model,
             fields,
             src_reader,
@@ -276,6 +276,8 @@ class Translator(object):
             report_score=report_score,
             logger=logger,
             seed=opt.seed)#829
+        obj.opt = opt
+        return obj
 
     def _log(self, msg):
         if self.logger:
@@ -392,8 +394,10 @@ class Translator(object):
 
             #print("batch_batch: {}".format(batch_data))
 
-            translations = xlation_builder.from_batch(batch_data)
-
+            translations, confidence = xlation_builder.from_batch(batch_data)
+            conf_dt = pd.DataFrame(confidence)
+            conf_savepath = self.opt.output.replace(".txt", "_confidence.csv")
+            conf_dt.to_csv(conf_savepath, mode="a", header=False, index=False)
             for trans in translations:
                 all_scores += [trans.pred_scores[:self.n_best]]
 
@@ -727,6 +731,7 @@ class Translator(object):
         #print("parallel_paths:{}".format(parallel_paths))
         # (1) Run the encoder on the src.
         src, enc_states, memory_bank, src_lengths = self._run_encoder(batch)
+        #print("memory_bank2:{}, memory_bank_shape:{}".format(memory_bank, memory_bank.size()))
         self.model.decoder.init_state(src, memory_bank, enc_states)
         
         #print("self.model.decoder_state :{}".format(self.model.decoder.state['src'].size()))
