@@ -273,7 +273,7 @@ def run():
 		if len(smis_li) != 5:
 			smis_li += [""] * (5 - len(smis_li))
 		recurr_list = []
-		for i in range(10):
+		for i in range(5):
 			list_cache = set(recurr_list)
 			smils_i = smis_li[i].split(".")
 			smis_li[i] = ".".join([smiles for smiles in smils_i if smiles not in list_cache])
