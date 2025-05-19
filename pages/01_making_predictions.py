@@ -270,8 +270,8 @@ def run():
 		
 		dp_smis = pd.read_csv(opt_tsl.output,header=None)
 		smis_li=[".".join(list(set(("".join(dp_smi.split(" "))).split(".")))) for dp_smi in dp_smis[0]]
-		if len(smis_li) != 10:
-			smis_li += [""] * (10 - len(smis_li))
+		if len(smis_li) != 5:
+			smis_li += [""] * (5 - len(smis_li))
 		recurr_list = []
 		for i in range(10):
 			list_cache = set(recurr_list)
@@ -280,7 +280,7 @@ def run():
 			recurr_list += smils_i
 		message_container = st.empty()
 		message_container.markdown("<br>".join([
-			f"**top{i}:** `{smis_li[i-1] + " "}`" for i in range(1,11)]), 
+			f"**top{i}:** `{smis_li[i-1] + " "}`" for i in range(1,6)]), 
 					   unsafe_allow_html=True
 					  )
 
@@ -293,9 +293,11 @@ def run():
 		# message_container.text(",".join([f"**top{i}:** `{smis_li[i-1]}`" for i in range(1,11)]))
 
 		
-		Fig1_col,Fig2_col,Fig3_col,Fig4_col,Fig5_col, Fig6_col, Fig7_col,Fig8_col,Fig9_col,Fig10_col, = st.columns([1]*10)
-		conf1_col,conf2_col,conf3_col,conf4_col,conf5_col, conf6_col, conf7_col,conf8_col,conf9_col,conf10_col, = st.columns([1]*10)
-		for i in range(1,11):
+		Fig1_col,Fig2_col,Fig3_col,Fig4_col,Fig5_col, = st.columns([1]*5)
+		#Fig6_col, Fig7_col,Fig8_col,Fig9_col,Fig10_col, = st.columns([1]*10)
+		conf1_col,conf2_col,conf3_col,conf4_col,conf5_col, = st.columns([1]*5)
+		# conf6_col, conf7_col,conf8_col,conf9_col,conf10_col, = st.columns([1]*10)
+		for i in range(1,6):
 			try:
 				cano_pro = Chem.MolToSmiles(Chem.MolFromSmiles(smis_li[i-1]))
 				exec(f"top{i}_fig = Draw.MolToImage(Chem.MolFromSmiles(smis_li[i-1]))")
