@@ -237,7 +237,7 @@ def run():
 		args_tsl = ['-model', model_path, \
 			    '-src', 'src.txt', \
 			    '-output', 'predictions.txt', \
-			    '-n_best', '10', \
+			    '-n_best', '5', \
 			    '-beam_size', '10', \
 			    '-max_length', '3000', \
 			    '-batch_size', '64']
