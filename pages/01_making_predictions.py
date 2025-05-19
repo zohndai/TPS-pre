@@ -240,7 +240,7 @@ def run():
 			    '-output', 'predictions.txt', \
 			    '-n_best', '5', \
 			    '-beam_size', '10', \
-			    '-max_length', '3000', \
+			    '-max_length', '300', \
 			    '-batch_size', '64']
 		opt_tsl = parser_tsl.parse_args(args_tsl)
 		ArgumentParser.validate_translate_opts(opt_tsl)
