@@ -8,7 +8,7 @@
           things to users(i.e. how to do it). Also see train.py(one of the
           users of this library) for the strategy things we do.
 """
-from visdom import Visdom
+
 import pandas as pd
 
 import torch
@@ -237,9 +237,7 @@ class Trainer(object):
             The gathered statistics.
         """
         pd.DataFrame(columns=['step', 'loss', 'acc']).to_csv(self.log_file_path,index=False)
-        viz = Visdom()
-        viz.line([[0., 0.]], [0.], win="loss", opts=dict(title="loss", legend=["training loss", "validate loss"]))
-        viz.line([[0., 0.]], [0.], win="acc", opts=dict(title="acc", legend=["trianing acc", "validate acc"]))
+      
 
 
         if valid_iter is None:
@@ -337,13 +335,7 @@ class Trainer(object):
                     if self.earlystopper.has_stopped():
                         break
             #if step % 50 == 0:
-                #viz.line([[train_loss, train_acc]], [step], win="pre-train", update="append")
-            if step % self.valid_steps == 0:
-                viz.line([[train_loss, self.val_lo]], [step], win="loss", update="append")
-                viz.line([[train_acc, self.val_ac]], [step], win="acc", update="append")
-                info_log = pd.DataFrame({'step':[step], 'loss':[self.val_lo],'acc': [self.val_ac]})
-                info_log.to_csv(self.log_file_path, mode='a', header=False, index=False)
-
+              
 
             if (self.model_saver is not None
                 and (save_checkpoint_steps != 0
