@@ -199,11 +199,11 @@ def run():
 	#pH_value = "%.2f"%(st.select_slider('Select a pH value:',options=[round(x * 0.01, 2) for x in range(0000, 1401)], value=3.00))
 	thresholds1_col, thresholds2_col,thresholds3_col,thresholds4_col,thresholds5_col, = st.columns([1]*5)
 	st.subheader('⚖️Specify probability thresholds for your prediction task, if not sure, use the default values')
-	thresholds1 = "{:.9f}".format(thresholds1_col.st.select_slider('top1 threshold:',options=[round(x * 0.000000001, 2) for x in range(0000000000, 1000000001)], value=0.991352424))
-	thresholds2 = "{:.9f}".format(thresholds2_col.st.select_slider('top2 threshold:',options=[round(x * 0.000000001, 2) for x in range(0000000000, 1000000001)], value=0.364181593))
-	thresholds3 = "{:.9f}".format(thresholds3_col.st.select_slider('top3 threshold:',options=[round(x * 0.000000001, 2) for x in range(0000000000, 1000000001)], value=0.237839789))
-	thresholds4 = "{:.9f}".format(thresholds4_col.st.select_slider('top4 threshold:',options=[round(x * 0.000000001, 2) for x in range(0000000000, 1000000001)], value=0.181993350))
-	thresholds5 = "{:.9f}".format(thresholds5_col.st.select_slider('top5 threshold:',options=[round(x * 0.000000001, 2) for x in range(0000000000, 1000000001)], value=0.140569091))
+	thresholds1 = "{:.9f}".format(thresholds1_col.select_slider('top1 threshold:',options=[round(x * 0.000000001, 2) for x in range(0000000000, 1000000001)], value=0.991352424))
+	thresholds2 = "{:.9f}".format(thresholds2_col.select_slider('top2 threshold:',options=[round(x * 0.000000001, 2) for x in range(0000000000, 1000000001)], value=0.364181593))
+	thresholds3 = "{:.9f}".format(thresholds3_col.select_slider('top3 threshold:',options=[round(x * 0.000000001, 2) for x in range(0000000000, 1000000001)], value=0.237839789))
+	thresholds4 = "{:.9f}".format(thresholds4_col.select_slider('top4 threshold:',options=[round(x * 0.000000001, 2) for x in range(0000000000, 1000000001)], value=0.181993350))
+	thresholds5 = "{:.9f}".format(thresholds5_col.select_slider('top5 threshold:',options=[round(x * 0.000000001, 2) for x in range(0000000000, 1000000001)], value=0.140569091))
 	# st.write('Selected pH value:', pH_value)
 		
 	
