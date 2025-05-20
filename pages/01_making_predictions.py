@@ -225,10 +225,12 @@ def run():
 		file.write(input)
 	st.subheader('⚖️Input probability threshold for your predictions, if not sure, use the default values')
 	thresholds1, thresholds2_col,thresholds3_col,thresholds4_col,thresholds5_col, = st.columns([1]*5)
-	thresholds2.textinput("top1 threshold", "0.991352424")
-	thresholds3.textinput("top2 threshold", "0.364181593")
-	thresholds4.textinput("top3 threshold", "0.18199335")
-	thresholds5.textinput("top4 threshold", "0.140569091")
+	
+	thresholds1.text_input("top1 threshold", "0.991352424")
+	thresholds2.text_input("top2 threshold", "0.364181593")
+	thresholds3.text_input("top3 threshold", "0.237839789")
+	thresholds4.text_input("top4 threshold", "0.181993350")
+	thresholds5.text_input("top4 threshold", "0.140569091")
 	
 	if col1.button('Get the prediction'):
 		# if all([not(prec), not(ros_smi)]):
