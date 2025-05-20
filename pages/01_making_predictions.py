@@ -194,13 +194,14 @@ def run():
 	
 	# "+" and "-" buttons for fine-tuning
 
-	st.subheader('⚖️Specify probability thresholds')
-	annotation(
-	    "提示",
-	    "如果没有特殊需求，请使用默认值",
-	    background="#e6f3ff",
-	    color="#0068c9"
-	)
+	# st.subheader('⚖️Specify probability thresholds')
+
+
+	components.html('''
+	<div title="如果没有特殊需求，请使用默认值" style="display:inline-block">
+	    <h3>⚖️Specify probability thresholds</h3>
+	</div>
+	''')
 	cols = st.columns(5)
 	default_values = [
 	    0.991352424,  # top1
