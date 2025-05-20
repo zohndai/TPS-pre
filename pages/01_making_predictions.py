@@ -305,8 +305,11 @@ def run():
 				eval(f"Fig{i}_col").image(eval(f"top{i}_fig"), caption = f'top{i}')
 			except:
 				eval(f"Fig{i}_col").image(Image.open("invalsmi.jpg"), caption = f'top{i}')
-			eval(f"conf{i}_col").text(f"confidence:{confid["confidence"][i-1]:5f}")
-		
+			# eval(f"conf{i}_col").text(f"confidence:{confid["confidence"][i-1]:5f}")
+			eval(f"conf{i}_col").markdown(
+				f"<div style='text-align: center;'> confidence: {confid['confidence'][i-1]:.5f}</div>",
+			unsafe_allow_html=True
+			)
 			st.cache_data.clear()
 			st.cache_resource.clear()
 	return
