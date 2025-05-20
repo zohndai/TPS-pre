@@ -674,7 +674,7 @@ class Translator(object):
                 attn = dec_attn["std"]
             else:
                 attn = None
-            log_probs = self.model.generator(dec_out.squeeze(0))
+            log_probs = self.model.generator(dec_out.squeeze(0)/1.8)
             #print("log_probs:{}, size:{}".format(log_probs, log_probs.size()))
             # returns [(batch_size x beam_size) , vocab ] when 1 step
             # or [tgt_len, batch_size, vocab] when full sentence
