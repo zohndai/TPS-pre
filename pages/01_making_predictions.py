@@ -223,7 +223,7 @@ def run():
 	input = smi_tokenize(src)
 	with open("src.txt", "w") as file:
 		file.write(input)
-	st.subheader('⚖️Input probability threshold for your predictions, if not sure, use the default values')
+	st.subheader('⚖️Specify probability thresholds for your prediction task, if not sure, use the default values')
 	thresholds1_col, thresholds2_col,thresholds3_col,thresholds4_col,thresholds5_col, = st.columns([1]*5)
 	
 	thresholds1 = thresholds1_col.text_input("top1 threshold", "0.991352424")
@@ -305,12 +305,6 @@ def run():
 		Fig1_col,Fig2_col,Fig3_col,Fig4_col,Fig5_col, = st.columns([1]*5)
 		#Fig6_col, Fig7_col,Fig8_col,Fig9_col,Fig10_col, = st.columns([1]*10)
 		conf1_col,conf2_col,conf3_col,conf4_col,conf5_col, = st.columns([1]*5)
-		# conf6_col, conf7_col,conf8_col,conf9_col,conf10_col, = st.columns([1]*10)
-		# color1 = "#00ff00" if confid['confidence'][0] > np.float64(thresholds1) else "#ff9900"
-		# color2 = "#00ff00" if confid['confidence'][1] > np.float64(thresholds2) else "#ff9900"
-		# color3 = "#00ff00" if confid['confidence'][2] > np.float64(thresholds3) else "#ff9900"
-		# color4 = "#00ff00" if confid['confidence'][3] > np.float64(thresholds4) else "#ff9900"
-		# color5 = "#00ff00" if confid['confidence'][4] > np.float64(thresholds5) else "#ff9900"
 		for i in range(1,6):
 			try:
 				cano_pro = Chem.MolToSmiles(Chem.MolFromSmiles(smis_li[i-1]))
@@ -319,7 +313,7 @@ def run():
 			except:
 				eval(f"Fig{i}_col").image(Image.open("invalsmi.jpg"), caption = f'top{i}')
 			# eval(f"conf{i}_col").text(f"confidence:{confid["confidence"][i-1]:5f}")
-			color = "#00ff00" if confid['confidence'][i-1] > np.float64(eval(f"thresholds{i}")) else "#ff9900"
+			color = "#00ff00" if confid['confidence'][i-1] >= np.float64(eval(f"thresholds{i}")) else "#ff9900"
 			eval(f"conf{i}_col").markdown(
 				f"""
 			    <div style='
