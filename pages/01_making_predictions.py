@@ -323,7 +323,7 @@ def run():
 			eval(f"conf{i}_col").markdown(
 				f"""
 			    <div style='
-       				text-align: center;color:{color};border: 1px solid {color};'> confidence: {confid['confidence'][i-1]:.5f}
+       				text-align: center;color:{color};font-family: monospace;'> confidence: {confid['confidence'][i-1]:.5f}
        				</div>
 			    """,
 			unsafe_allow_html=True
