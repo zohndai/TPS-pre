@@ -1,6 +1,6 @@
 import streamlit as st
 from streamlit_ketcher import st_ketcher
-import streamlit.components.v1 as components
+# import streamlit.components.v1 as components
 import pandas as pd
 import numpy as np
 import rdkit
@@ -194,14 +194,7 @@ def run():
 	
 	# "+" and "-" buttons for fine-tuning
 
-	# st.subheader('⚖️Specify probability thresholds')
-
-
-	components.html('''
-	<div title="如果没有特殊需求，请使用默认值" style="display:inline-block">
-	    <h3>⚖️Specify probability thresholds</h3>
-	</div>
-	''')
+	st.subheader('⚖️Specify probability thresholds')
 	cols = st.columns(5)
 	default_values = [
 	    0.991352424,  # top1
