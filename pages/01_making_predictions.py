@@ -42,6 +42,19 @@ def smi_tokenize(smi):
     tokens = [token for token in compiled_pt.findall(smi)]
     #assert smi == ''.join(tokens)
     return " ".join(tokens)
+def cano_smi(smi):
+	if not smi:
+		return smi
+	smi_list = smi.split(".")
+	len = len(smi_list)
+	if len > 1:
+		for i in range(len):
+			try:
+				smi_list[i] = Chem.MolToSmiles(Chem.MolFromSmiles(smi_list[i]))
+			except:
+				smi_list[i] = smi_list[i]
+	cano_smiles = ".".join(smi_list)
+	return cano_smiles	      
 @st.cache_resource
 def load_model(fd,model_name):
     file_id = fd
@@ -286,14 +299,14 @@ def run():
 
 		
 		dp_smis = pd.read_csv(opt_tsl.output,header=None)
-		smis_li=[".".join(list(set(("".join(dp_smi.split(" "))).split(".")))) for dp_smi in dp_smis[0]]
+		smis_li=[".".join(list(set((cano_smi("".join(dp_smi.split(" ")))).split(".")))) for dp_smi in dp_smis[0]]
 		if len(smis_li) != 5:
 			smis_li += [""] * (5 - len(smis_li))
 		# recurr_list = []
-		# for i in range(5):
-		# 	list_cache = set(recurr_list)
+		for i in range(5):
+			list_cache = list([cano_pollu])
 		# 	smils_i = smis_li[i].split(".")
-		# 	smis_li[i] = ".".join([smiles for smiles in smils_i if smiles not in list_cache])
+			smis_li[i] = ".".join([smiles for smiles in smils_li[i].split(".") if smiles not in list_cache])
 		# 	recurr_list += smils_i
 		message_container = st.empty()
 		message_container.markdown("<br>".join([
