@@ -195,7 +195,7 @@ def run():
 	# "+" and "-" buttons for fine-tuning
 
 	st.subheader('⚖️Specify probability thresholds')
-	st.markdown("ℹ️ if not sure, use the default values")
+	st.markdown("ℹ 📌if not sure, use the default values")
 	
 	cols = st.columns(5)
 	
@@ -220,11 +220,6 @@ def run():
 	            step=1e-9,
 	            help=f"模型推荐值: {default_values[i]:.9f}"  # 添加悬浮提示
 	        )
-	
-	if st.button("🔄 reset", type="secondary"):
-	    for i in range(5):
-	        st.session_state[f"thresh_{i+1}"] = default_values[i]
-	    st.rerun()
 
 	col1, col2, col3, col4= st.columns([2,2,1,1])
 	ros_smi = ros_smis[ros_name.index(ros_selct)]
