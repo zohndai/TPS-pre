@@ -195,8 +195,7 @@ def run():
 	# "+" and "-" buttons for fine-tuning
 
 	st.subheader('⚖️Specify probability thresholds')
-	st.markdown("ℹ 📌if not sure, use the default values")
-	
+	st.caption("if not sure, use default values")
 	cols = st.columns(5)
 	
 	# ========== 阈值输入组件 ==========
@@ -218,7 +217,7 @@ def run():
 	            value=default_values[i],
 	            format="%.9f",
 	            step=1e-9,
-	            help=f"模型推荐值: {default_values[i]:.9f}"  # 添加悬浮提示
+	            help=f"default: {default_values[i]:.9f}"
 	        )
 
 	col1, col2, col3, col4= st.columns([2,2,1,1])
