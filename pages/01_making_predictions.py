@@ -305,7 +305,7 @@ def run():
 		for i in range(5):
 			list_cache = list([cano_pollu])
 		# 	smils_i = smis_li[i].split(".")
-			smis_li[i] = ".".join([smiles for smiles in smils_li[i].split(".") if smiles not in list_cache])
+			smis_li[i] = ".".join([smiles for smiles in smis_li[i].split(".") if smiles not in list_cache])
 		# 	recurr_list += smils_i
 		message_container = st.empty()
 		message_container.markdown("<br>".join([
