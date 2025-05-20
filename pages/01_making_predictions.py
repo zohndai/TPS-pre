@@ -232,36 +232,10 @@ def run():
 	            help=f"模型推荐值: {default_values[i]:.9f}"  # 添加悬浮提示
 	        )
 	
-	# ========== 重置按钮 ==========
-	if st.button("🔄 重置为默认值", type="secondary"):
+	if st.button("🔄 reset", type="secondary"):
 	    for i in range(5):
 	        st.session_state[f"thresh_{i+1}"] = default_values[i]
-	    st.experimental_rerun()
-
-
-	    
-	
-	# cols = st.columns(5)
-	# thresholds = {}
-	# for i in range(5):
-	#     with cols[i]:
-	        
-	#         key = f"thresh_{i+1}"
-	#         thresholds[key] = st.number_input(
-	#             label=f"top{i+1} threshold:",
-	#             min_value=0.0,
-	#             max_value=1.0,
-	#             value=0.991352424 if i==0 else 0.364181593 if i==1 else 0.237839789 if i==2 else 0.181993350 if i==3 else 0.140569091,
-	#             format="%.9f",  # 
-	#             step=1e-9,      # 
-	#             key=key
-	#         )
-
-	# thresholds1 = thresholds1_col.text_input("top1 threshold", "0.991352424")
-	# thresholds2 = thresholds2_col.text_input("top2 threshold", "0.364181593")
-	# thresholds3 = thresholds3_col.text_input("top3 threshold", "0.237839789")
-	# thresholds4 = thresholds4_col.text_input("top4 threshold", "0.181993350")
-	# thresholds5 = thresholds5_col.text_input("top5 threshold", "0.140569091")
+	    st.rerun()
 
 	col1, col2, col3, col4= st.columns([2,2,1,1])
 	ros_smi = ros_smis[ros_name.index(ros_selct)]
@@ -285,14 +259,6 @@ def run():
 	input = smi_tokenize(src)
 	with open("src.txt", "w") as file:
 		file.write(input)
-	# st.subheader('⚖️Specify probability thresholds for your prediction task, if not sure, use the default values')
-	# thresholds1_col, thresholds2_col,thresholds3_col,thresholds4_col,thresholds5_col, = st.columns([1]*5)
-	
-	# thresholds1 = thresholds1_col.text_input("top1 threshold", "0.991352424")
-	# thresholds2 = thresholds2_col.text_input("top2 threshold", "0.364181593")
-	# thresholds3 = thresholds3_col.text_input("top3 threshold", "0.237839789")
-	# thresholds4 = thresholds4_col.text_input("top4 threshold", "0.181993350")
-	# thresholds5 = thresholds5_col.text_input("top5 threshold", "0.140569091")
 	
 	if col1.button('Get the prediction'):
 		# if all([not(prec), not(ros_smi)]):
