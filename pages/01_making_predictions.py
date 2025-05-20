@@ -46,13 +46,12 @@ def cano_smi(smi):
 	if not smi:
 		return smi
 	smi_list = smi.split(".")
-	len = len(smi_list)
-	if len > 1:
-		for i in range(len):
-			try:
-				smi_list[i] = Chem.MolToSmiles(Chem.MolFromSmiles(smi_list[i]))
-			except:
-				smi_list[i] = smi_list[i]
+	smi_num = len(smi_list)
+	for i in range(smi_num):
+		try:
+			smi_list[i] = Chem.MolToSmiles(Chem.MolFromSmiles(smi_list[i]))
+		except:
+			smi_list[i] = smi_list[i]		
 	cano_smiles = ".".join(smi_list)
 	return cano_smiles	      
 @st.cache_resource
