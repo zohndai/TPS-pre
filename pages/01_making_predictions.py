@@ -306,11 +306,11 @@ def run():
 		#Fig6_col, Fig7_col,Fig8_col,Fig9_col,Fig10_col, = st.columns([1]*10)
 		conf1_col,conf2_col,conf3_col,conf4_col,conf5_col, = st.columns([1]*5)
 		# conf6_col, conf7_col,conf8_col,conf9_col,conf10_col, = st.columns([1]*10)
-		color1 = "#00ff00" if confid['confidence'][0] > np.float64(thresholds1) else "#ff9900"
-		color2 = "#00ff00" if confid['confidence'][1] > np.float64(thresholds2) else "#ff9900"
-		color3 = "#00ff00" if confid['confidence'][2] > np.float64(thresholds3) else "#ff9900"
-		color4 = "#00ff00" if confid['confidence'][3] > np.float64(thresholds4) else "#ff9900"
-		color5 = "#00ff00" if confid['confidence'][4] > np.float64(thresholds5) else "#ff9900"
+		# color1 = "#00ff00" if confid['confidence'][0] > np.float64(thresholds1) else "#ff9900"
+		# color2 = "#00ff00" if confid['confidence'][1] > np.float64(thresholds2) else "#ff9900"
+		# color3 = "#00ff00" if confid['confidence'][2] > np.float64(thresholds3) else "#ff9900"
+		# color4 = "#00ff00" if confid['confidence'][3] > np.float64(thresholds4) else "#ff9900"
+		# color5 = "#00ff00" if confid['confidence'][4] > np.float64(thresholds5) else "#ff9900"
 		for i in range(1,6):
 			try:
 				cano_pro = Chem.MolToSmiles(Chem.MolFromSmiles(smis_li[i-1]))
@@ -319,10 +319,11 @@ def run():
 			except:
 				eval(f"Fig{i}_col").image(Image.open("invalsmi.jpg"), caption = f'top{i}')
 			# eval(f"conf{i}_col").text(f"confidence:{confid["confidence"][i-1]:5f}")
+			color = "#00ff00" if confid['confidence'][i-1] > np.float64(eval(f"thresholds{i}")) else "#ff9900"
 			eval(f"conf{i}_col").markdown(
 				f"""
 			    <div style='
-       				text-align: center;color:{eval(f"color{i}")}'> confidence: {confid['confidence'][i-1]:.5f}
+       				text-align: center;color:{color};border: 1px solid {color};'> confidence: {confid['confidence'][i-1]:.5f}
        				</div>
 			    """,
 			unsafe_allow_html=True
