@@ -223,6 +223,12 @@ def run():
 	input = smi_tokenize(src)
 	with open("src.txt", "w") as file:
 		file.write(input)
+	st.subheader('⚖️Input probability threshold for your predictions, if not sure, use the default values')
+	thresholds1, thresholds2_col,thresholds3_col,thresholds4_col,thresholds5_col, = st.columns([1]*5)
+	thresholds2.textinput("top1 threshold", "0.991352424")
+	thresholds3.textinput("top2 threshold", "0.364181593")
+	thresholds4.textinput("top3 threshold", "0.18199335")
+	thresholds5.textinput("top4 threshold", "0.140569091")
 	
 	if col1.button('Get the prediction'):
 		# if all([not(prec), not(ros_smi)]):
@@ -292,12 +298,17 @@ def run():
 
 		# st.markdown(",".join([f"**top{i}:** `{smis_li[i-1]}`" for i in range(1,11)])) 这行速度太慢了
 		# message_container.text(",".join([f"**top{i}:** `{smis_li[i-1]}`" for i in range(1,11)]))
-
+		
 		
 		Fig1_col,Fig2_col,Fig3_col,Fig4_col,Fig5_col, = st.columns([1]*5)
 		#Fig6_col, Fig7_col,Fig8_col,Fig9_col,Fig10_col, = st.columns([1]*10)
 		conf1_col,conf2_col,conf3_col,conf4_col,conf5_col, = st.columns([1]*5)
 		# conf6_col, conf7_col,conf8_col,conf9_col,conf10_col, = st.columns([1]*10)
+		color1 = "#00ff00" if confid['confidence'][0] > np.float(thresholds1) else "#ff9900"
+		color2 = "#00ff00" if confid['confidence'][1] > np.float(thresholds2) else "#ff9900"
+		color3 = "#00ff00" if confid['confidence'][2] > np.float(thresholds3) else "#ff9900"
+		color4 = "#00ff00" if confid['confidence'][3] > np.float(thresholds4) else "#ff9900"
+		color5 = "#00ff00" if confid['confidence'][4] > np.float(thresholds5) else "#ff9900"
 		for i in range(1,6):
 			try:
 				cano_pro = Chem.MolToSmiles(Chem.MolFromSmiles(smis_li[i-1]))
@@ -307,7 +318,11 @@ def run():
 				eval(f"Fig{i}_col").image(Image.open("invalsmi.jpg"), caption = f'top{i}')
 			# eval(f"conf{i}_col").text(f"confidence:{confid["confidence"][i-1]:5f}")
 			eval(f"conf{i}_col").markdown(
-				f"<div style='text-align: center;'> confidence: {confid['confidence'][i-1]:.5f}</div>",
+				f"""
+			    <div style='
+       				text-align: center;color:{eval(f"color{i}")}'> confidence: {confid['confidence'][i-1]:.5f}
+       				</div>
+			    """,
 			unsafe_allow_html=True
 			)
 			st.cache_data.clear()
