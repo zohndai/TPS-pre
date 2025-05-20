@@ -1,4 +1,5 @@
 import streamlit as st
+from annotated_text import annotation
 from streamlit_ketcher import st_ketcher
 # import streamlit.components.v1 as components
 import pandas as pd
@@ -195,10 +196,13 @@ def run():
 	# "+" and "-" buttons for fine-tuning
 
 	st.subheader('⚖️Specify probability thresholds')
-	st.caption("if not sure, use default values")
+	annotation(
+	    "提示",
+	    "如果没有特殊需求，请使用默认值",
+	    background="#e6f3ff",
+	    color="#0068c9"
+	)
 	cols = st.columns(5)
-	
-	# ========== 阈值输入组件 ==========
 	default_values = [
 	    0.991352424,  # top1
 	    0.364181593,  # top2
