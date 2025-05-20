@@ -184,7 +184,7 @@ def run():
 	#st.write('You selected:', ros_selct)
 	#select = st.radio("Please specify the property or activity you want to predict", ('OH radical', 'SO4- radical', 'Koc', 'Solubility','pKd','pIC50','CCSM_H','CCSM_Na', 'Lipo','FreeSolv' ))
 	st.subheader('🧪Which precursors generate ROSs')
-	prec = st.text_input("Please enter the SMILES notation for the precursor(s), including the parent oxidant and any activator (if applicable), e.g. 'OO.[Fe+2]' for the fenton reagent H2O2/Fe2+, if not sure, leave this field blank", "OO.[Fe+2]")
+	prec = st.text_input("Please enter the SMILES notation for the precursor(s), including the parent oxidant and any activator (if applicable), e.g. 'OO.[Fe+2]' for the fenton reagent H2O2/Fe2+, if not sure, leave this field blank", "")
 	#if prec !='':
 		#st.warning('Invalid chemical name or CAS number of precursors, please check it again or imput SMILES')
 		#st.stop()
@@ -194,7 +194,7 @@ def run():
 		       "Microwave", "Electricity", "Ultrasound", "Sunlight", " Infrared", "No energy input"),8)
 	
 	st.subheader('🌡️Please input the reaction pH for pollutant degradation')
-	pH_value = st.text_input("Keep two decimal places","3.00")
+	pH_value = st.text_input("Keep two decimal places","")
 
 	
 
