@@ -195,18 +195,7 @@ def run():
 	# "+" and "-" buttons for fine-tuning
 
 	st.subheader('⚖️Specify probability thresholds')
-	st.markdown("""
-	<div style="
-	    color: #666;
-	    font-size: 0.9em;
-	    padding: 10px;
-	    border-left: 3px solid #4CAF50;
-	    background: #f8f9fa;
-	    margin-bottom: 20px;
-	">
-	    ℹ️ 默认阈值为模型测试时最佳参考值，如果没有特殊需要，请使用默认值
-	</div>
-	""", unsafe_allow_html=True)
+	st.markdown("ℹ️ if not sure, use the default values")
 	
 	cols = st.columns(5)
 	
