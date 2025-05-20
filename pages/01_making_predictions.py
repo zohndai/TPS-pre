@@ -321,7 +321,7 @@ def run():
 			except:
 				eval(f"Fig{i}_col").image(Image.open("invalsmi.jpg"), caption = f'top{i}')
 			# eval(f"conf{i}_col").text(f"confidence:{confid["confidence"][i-1]:5f}")
-			color = "#00ff00" if confid['confidence'][i-1] >= np.float64(thresholds[i+1]) else "#ff9900"
+			color = "#00ff00" if confid['confidence'][i-1] >= np.float64(thresholds[i-1]) else "#ff9900"
 			eval(f"conf{i}_col").markdown(
 				f"""
 			    <div style='
