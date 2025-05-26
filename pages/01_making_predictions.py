@@ -298,6 +298,10 @@ def run():
 
 		
 		dp_smis = pd.read_csv(opt_tsl.output,header=None)
+		confid = pd.read_csv(
+			opt_tsl.output.replace(".txt", "_confidence.csv"),
+			header=None, names=["confidence"]
+		)
 		smis_li=[".".join(list(set((cano_smi("".join(dp_smi.split(" ")))).split(".")))) for dp_smi in dp_smis[0]]
 		if len(smis_li) != 5:
 			smis_li += [""] * (5 - len(smis_li))
@@ -318,11 +322,6 @@ def run():
 			    for i in range(1, 6)
 			]), unsafe_allow_html=True)
 		 
-
-		confid = pd.read_csv(
-			opt_tsl.output.replace(".txt", "_confidence.csv"),
-			header=None, names=["confidence"]
-		)
 
 		# st.markdown(",".join([f"**top{i}:** `{smis_li[i-1]}`" for i in range(1,11)])) 这行速度太慢了
 		# message_container.text(",".join([f"**top{i}:** `{smis_li[i-1]}`" for i in range(1,11)]))
