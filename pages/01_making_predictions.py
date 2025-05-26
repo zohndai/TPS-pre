@@ -308,10 +308,16 @@ def run():
 			smis_li[i] = ".".join([smiles for smiles in smis_li[i].split(".") if smiles not in list_cache])
 		# 	recurr_list += smils_i
 		message_container = st.empty()
+		
+		# message_container.markdown("<br>".join([
+		# 	f"**top{i}:** `{smis_li[i-1] + " "}`" for i in range(1,6)]), 
+		# 			   unsafe_allow_html=True
+		# 			  )
 		message_container.markdown("<br>".join([
-			f"**top{i}:** `{smis_li[i-1] + " "}`" for i in range(1,6)]), 
-					   unsafe_allow_html=True
-					  )
+			    f"<b>top{i}:</b> <span style='color:{'#00ff00' if confid['confidence'][i-1] > np.float64(thresholds[i-1] else '#ff9900'}'>{smis_li[i-1]}</span>"
+			    for i in range(1, 6)
+			]), unsafe_allow_html=True)
+		 
 
 		confid = pd.read_csv(
 			opt_tsl.output.replace(".txt", "_confidence.csv"),
