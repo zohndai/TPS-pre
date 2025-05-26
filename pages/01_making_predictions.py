@@ -314,7 +314,7 @@ def run():
 		# 			   unsafe_allow_html=True
 		# 			  )
 		message_container.markdown("<br>".join([
-			    f"<b>top{i}:</b> <span style='color:{'#00ff00' if confid['confidence'][i-1] > np.float64(thresholds[i-1] else '#ff9900'}'>{smis_li[i-1]}</span>"
+			    f"<b>top{i}:</b> <span style='color:{"#00ff00" if confid['confidence'][i-1] >= np.float64(thresholds[i-1]) else "#ff9900"}'>{smis_li[i-1]}</span>"
 			    for i in range(1, 6)
 			]), unsafe_allow_html=True)
 		 
