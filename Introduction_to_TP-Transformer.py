@@ -15,11 +15,11 @@ with st.sidebar:
     # st.header("设置")
     
     # 添加垂直空间以将联系方式推到底部
-    st.markdown("<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>", unsafe_allow_html=True)
+    st.markdown("<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>", unsafe_allow_html=True)
 
     # # 底部联系方式展示
     # st.markdown("---")
-    st.markdown("### 📬 Contact us")
+    st.markdown("### 📞 Contact us")
     st.markdown("📧 Email: [zhen.h.dai@outlook.com](mailto:your_email@example.com)")
     # st.markdown("📱 微信: your_wechat_id")
     st.markdown("[📝 feedback](https://docs.qq.com/form/page/DVFdraEFYeEdCZEJ6)")
