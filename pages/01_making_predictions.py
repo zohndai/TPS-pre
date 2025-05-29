@@ -1,6 +1,7 @@
 import streamlit as st
 from streamlit_ketcher import st_ketcher
 # import streamlit.components.v1 as components
+from streamlit.components.v1 import html
 import pandas as pd
 import numpy as np
 import rdkit
@@ -318,24 +319,32 @@ def run():
 		# 	smils_i = smis_li[i].split(".")
 			smis_li[i] = ".".join([smiles for smiles in smis_li[i].split(".") if smiles not in list_cache])
 		# 	recurr_list += smils_i
-		message_container = st.empty()
+		# message_container = st.empty()
 
 
-		message_container.markdown(f"{dp_smis[0]}")
+		# message_container.markdown(f"{dp_smis[0]}")
 		
 		# message_container.markdown("<br>".join([
 		# 	f"**top{i}:** `{smis_li[i-1] + " "}`" for i in range(1,6)]), 
 		# 			   unsafe_allow_html=True
 		# 			  )
-		message_container.markdown("<br>".join([
-			    f"<b>top{i}:</b> <span style='color:{"#00ff00" if confid['confidence'][i-1] >= np.float64(thresholds[i-1]) else "#ff9900"}; font-family: monospace;'>{smis_li[i-1]}</span>"
-			    for i in range(1, 6)
-			]), unsafe_allow_html=True)
+		# message_container.markdown("<br>".join([
+			    # f"<b>top{i}:</b> <span style='color:{"#00ff00" if confid['confidence'][i-1] >= np.float64(thresholds[i-1]) else "#ff9900"}; font-family: monospace;'>{smis_li[i-1]}</span>"
+			    # for i in range(1, 6)
+			# ]), unsafe_allow_html=True)
 		 
 
 		# st.markdown(",".join([f"**top{i}:** `{smis_li[i-1]}`" for i in range(1,11)])) 这行速度太慢了
 		# message_container.text(",".join([f"**top{i}:** `{smis_li[i-1]}`" for i in range(1,11)]))
+
+		html_content = "<div>" + "<br>".join([
+		    f"<b>top{i}:</b> <span style='color:{"#00ff00" if confid['confidence'][i-1] >= np.float64(thresholds[i-1]) else "#ff9900"}; font-family: monospace;'>{smis_li[i-1]}</span>"
+		    for i in range(1, 6)
+		]) + "</div>"
 		
+		html(html_content)
+
+
 		
 		Fig1_col,Fig2_col,Fig3_col,Fig4_col,Fig5_col, = st.columns([1]*5)
 		#Fig6_col, Fig7_col,Fig8_col,Fig9_col,Fig10_col, = st.columns([1]*10)
