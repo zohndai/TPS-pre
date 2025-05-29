@@ -12,7 +12,7 @@ st.set_page_config(
 )
 
 with st.sidebar:
-    st.header("设置")
+    # st.header("设置")
     
     # 添加垂直空间以将联系方式推到底部
     st.markdown("<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>", unsafe_allow_html=True)
