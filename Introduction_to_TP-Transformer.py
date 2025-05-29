@@ -11,15 +11,37 @@ st.set_page_config(
     initial_sidebar_state="auto" 
 )
 
-with st.expander("📬 联系开发者"):
-    st.markdown("**📧 邮箱**: [your_email@example.com](mailto:your_email@example.com)")
-    st.markdown("**📋 反馈表单**: [点击填写](https://example.com/your-form)")
+
+with st.sidebar:
+    st.header("📬 联系开发者")
+    if st.button("📨 点我联系"):
+        st.session_state.show_contact = not st.session_state.show_contact
+
+# 主页面显示联系信息
+if st.session_state.show_contact:
+    with st.expander("📞 开发者联系方式", expanded=True):
+        st.markdown("您可以通过以下方式联系我：")
+
+        col1, col2 = st.columns([1, 5])
+        with col1:
+            st.image("https://img.icons8.com/ios-glyphs/30/000000/new-post.png", width=24)
+        with col2:
+            st.markdown("[发送邮件](mailto:your_email@example.com)")
+
+        col3, col4 = st.columns([1, 5])
+        with col3:
+            st.image("https://img.icons8.com/external-flat-juicy-fish/60/000000/external-form-ux-and-ui-flat-flat-juicy-fish.png", width=24)
+        with col4:
+            st.markdown("[在线反馈表单](https://example.com/your-form)")
+
+        st.markdown("感谢您的反馈！我们会尽快回复。")
 
 
-st.sidebar.markdown("## 📞Contact us")
-st.sidebar.markdown("📬 Email: zhen.h.dai@outlook.com")
-st.sidebar.markdown("📱 Wechat: Zohn-wehcat")
-st.sidebar.markdown("[feedback](https://docs.qq.com/form/page/DVFdraEFYeEdCZEJ6)")
+
+# st.sidebar.markdown("## 📞Contact us")
+# st.sidebar.markdown("📬 Email: zhen.h.dai@outlook.com")
+# st.sidebar.markdown("📱 Wechat: Zohn-wehcat")
+# st.sidebar.markdown("[feedback](https://docs.qq.com/form/page/DVFdraEFYeEdCZEJ6)")
 
 visitor = pd.read_csv("visi_num.txt")
 visi_num = visitor['num'][0]
