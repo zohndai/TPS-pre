@@ -3,34 +3,9 @@ import pandas as pd
 #from numpy import np
 from PIL import Image
 import streamlit.components.v1 as components
-import base64
-from io import BytesIO
 
-def create_contact_logo():
-    # 创建画布
-    from PIL import Image, ImageDraw, ImageFont
-    width, height = 300, 150
-    img = Image.new('RGB', (width, height), (25, 39, 52))  # 深蓝背景
-    draw = ImageDraw.Draw(img)
-    
-    # 添加图标和文字
-    try:
-        # 尝试加载字体 (使用Streamlit内置字体)
-        font = ImageFont.truetype("arial.ttf", 20)
-    except:
-        font = ImageFont.load_default()
-    
-    # 绘制联系图标
-    draw.ellipse([(30, 30), (80, 80)], outline="#4FC3F7", width=3)  # 头部
-    draw.line([(55, 80), (55, 120)], fill="#4FC3F7", width=3)       # 身体
-    draw.line([(30, 100), (80, 100)], fill="#4FC3F7", width=3)      # 手臂
-    
-    # 添加联系信息
-    draw.text((100, 40), "遇到问题?", font=font, fill="#E3F2FD")
-    draw.text((100, 70), "联系开发者:", font=font, fill="#4FC3F7")
-    draw.text((100, 100), "zhen.h.dai@outlook.com", font=font, fill="#FFFFFF")
-    
-    return img
+
+
 
 
 
@@ -41,7 +16,10 @@ st.set_page_config(
     initial_sidebar_state="auto" 
 )
 
-
+st.sidebar.markdown("## 联系方式")
+st.sidebar.markdown("📧 邮箱: your_email@example.com")
+st.sidebar.markdown("📱 微信: your_wechat_id")
+st.sidebar.markdown("[点击填写反馈表单](https://example.com)")
 visitor = pd.read_csv("visi_num.txt")
 visi_num = visitor['num'][0]
 
@@ -197,59 +175,6 @@ particles_js = """<!DOCTYPE html>
 </body>
 </html>
 """
-
-
-# 将联系方式转换为Base64
-contact_logo = create_contact_logo()
-buffered = BytesIO()
-contact_logo.save(buffered, format="PNG")
-img_str = base64.b64encode(buffered.getvalue()).decode()
-
-# 使用HTML/CSS创建固定位置的联系按钮
-st.markdown(
-    f"""
-    <style>
-    .contact-badge {{
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        z-index: 100;
-        border-radius: 8px;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-        transition: transform 0.3s;
-        cursor: pointer;
-        background: rgba(25, 39, 52, 0.9);
-        padding: 5px;
-        max-width: 120px;
-    }}
-    .contact-badge:hover {{
-        transform: scale(1.05);
-        box-shadow: 0 6px 12px rgba(0,0,0,0.3);
-    }}
-    </style>
-    
-    <div class="contact-badge" onclick="window.location.href='mailto:contact@yourdomain.com';">
-        <img src="data:image/png;base64,{img_str}" alt="联系我们" style="width:100%; border-radius:6px;">
-    </div>
-    """,
-    unsafe_allow_html=True
-)
-
-# 悬停提示
-st.markdown(
-    """
-    <script>
-    // 添加悬停提示
-    document.addEventListener('DOMContentLoaded', function() {
-        const badge = document.querySelector('.contact-badge');
-        badge.title = "点击联系开发者解决问题";
-    });
-    </script>
-    """,
-    unsafe_allow_html=True
-)
-
-
 
 if "has_snowed" not in st.session_state:
     st.snow()
