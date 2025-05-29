@@ -325,16 +325,16 @@ def run():
 		message_container = st.empty()
 
 
-		message_container.markdown(f"{dp_smis}")
+		message_container.markdown(f"{dp_smis[0]}")
 		
 		# message_container.markdown("<br>".join([
 		# 	f"**top{i}:** `{smis_li[i-1] + " "}`" for i in range(1,6)]), 
 		# 			   unsafe_allow_html=True
 		# 			  )
-		message_container.markdown("<br>".join([
-			    f"<b>top{i}:</b> <span style='color:{"#00ff00" if confid['confidence'][i-1] >= np.float64(thresholds[i-1]) else "#ff9900"}; font-family: monospace;'>{smis_li[i-1]}</span>"
-			    for i in range(1, 6)
-			]), unsafe_allow_html=True)
+		# message_container.markdown("<br>".join([
+		# 	    f"<b>top{i}:</b> <span style='color:{"#00ff00" if confid['confidence'][i-1] >= np.float64(thresholds[i-1]) else "#ff9900"}; font-family: monospace;'>{smis_li[i-1]}</span>"
+		# 	    for i in range(1, 6)
+		# 	]), unsafe_allow_html=True)
 		 
 
 		# st.markdown(",".join([f"**top{i}:** `{smis_li[i-1]}`" for i in range(1,11)])) 这行速度太慢了
