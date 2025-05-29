@@ -305,6 +305,10 @@ def run():
 
 		
 		dp_smis = pd.read_csv(opt_tsl.output,header=None)
+
+		st.text(f"dp_smis")
+
+		
 		confid = pd.read_csv(
 			opt_tsl.output.replace(".txt", "_confidence.csv"),
 			header=None, names=["confidence"]
