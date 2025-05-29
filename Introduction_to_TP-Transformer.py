@@ -19,8 +19,8 @@ with st.sidebar:
 
     # # 底部联系方式展示
     # st.markdown("---")
-    st.markdown("### 📞Contact us")
-    st.markdown("📧 Email: [zhenhdai@gmail.com](mailto:zhen.h.dai@outlook.com)")
+    st.markdown("### Contact us")
+    st.markdown("📧 Email: [zhen.h.dai@outlook.com](mailto:zhen.h.dai@outlook.com)")
     # st.markdown("📱 微信: your_wechat_id")
     st.markdown("[📝 feedback](https://docs.qq.com/form/page/DVFdraEFYeEdCZEJ6)")
 
