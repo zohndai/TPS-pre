@@ -28,7 +28,7 @@ def create_contact_logo():
     # 添加联系信息
     draw.text((100, 40), "遇到问题?", font=font, fill="#E3F2FD")
     draw.text((100, 70), "联系开发者:", font=font, fill="#4FC3F7")
-    draw.text((100, 100), "contact@yourdomain.com", font=font, fill="#FFFFFF")
+    draw.text((100, 100), "zhen.h.dai@outlook.com", font=font, fill="#FFFFFF")
     
     return img
 
