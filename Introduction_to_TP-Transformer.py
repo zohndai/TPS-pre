@@ -13,7 +13,7 @@ st.set_page_config(
 
 with st.sidebar:
     # st.header("设置")
-    with st.expander("📞Contact us"):
+    with st.expander("📞Contact developer"):
 		# st.write('You can get SMILES of any molecules from PubChem https://pubchem.ncbi.nlm.nih.gov/ by typing Chemical name or ACS number')
     # st.markdown("---")
 	    # st.markdown("### Contact us")
