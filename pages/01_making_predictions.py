@@ -306,7 +306,7 @@ def run():
 		
 		dp_smis = pd.read_csv(opt_tsl.output,header=None)
 
-		print(dp_smis)
+		
 
 		
 		confid = pd.read_csv(
@@ -323,6 +323,9 @@ def run():
 			smis_li[i] = ".".join([smiles for smiles in smis_li[i].split(".") if smiles not in list_cache])
 		# 	recurr_list += smils_i
 		message_container = st.empty()
+
+
+		message_container.markdown(f"{dp_smis}")
 		
 		# message_container.markdown("<br>".join([
 		# 	f"**top{i}:** `{smis_li[i-1] + " "}`" for i in range(1,6)]), 
