@@ -11,6 +11,11 @@ st.set_page_config(
     initial_sidebar_state="auto" 
 )
 
+with st.expander("📬 联系开发者"):
+    st.markdown("**📧 邮箱**: [your_email@example.com](mailto:your_email@example.com)")
+    st.markdown("**📋 反馈表单**: [点击填写](https://example.com/your-form)")
+
+
 st.sidebar.markdown("## 📞Contact us")
 st.sidebar.markdown("📬 Email: zhen.h.dai@outlook.com")
 st.sidebar.markdown("📱 Wechat: Zohn-wehcat")
