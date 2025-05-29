@@ -140,7 +140,7 @@ with st.sidebar:
     # st.header("设置")
     
     # 添加垂直空间以将联系方式推到底部
-    st.markdown("<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>", unsafe_allow_html=True)
+    # st.markdown("<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>", unsafe_allow_html=True)
 
     # # 底部联系方式展示
     # st.markdown("---")
