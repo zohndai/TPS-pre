@@ -306,7 +306,7 @@ def run():
 		
 		dp_smis = pd.read_csv(opt_tsl.output,header=None)
 
-		st.text(f"dp_smis")
+		print(dp_smis)
 
 		
 		confid = pd.read_csv(
