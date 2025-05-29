@@ -198,38 +198,6 @@ particles_js = """<!DOCTYPE html>
 </html>
 """
 
-import streamlit as st
-from PIL import Image
-import base64
-from io import BytesIO
-
-# ================ 联系方式Logo生成器 ================
-def create_contact_logo():
-    # 创建画布
-    from PIL import Image, ImageDraw, ImageFont
-    width, height = 300, 150
-    img = Image.new('RGB', (width, height), (25, 39, 52))  # 深蓝背景
-    draw = ImageDraw.Draw(img)
-    
-    # 添加图标和文字
-    try:
-        # 尝试加载字体 (使用Streamlit内置字体)
-        font = ImageFont.truetype("arial.ttf", 20)
-    except:
-        font = ImageFont.load_default()
-    
-    # 绘制联系图标
-    draw.ellipse([(30, 30), (80, 80)], outline="#4FC3F7", width=3)  # 头部
-    draw.line([(55, 80), (55, 120)], fill="#4FC3F7", width=3)       # 身体
-    draw.line([(30, 100), (80, 100)], fill="#4FC3F7", width=3)      # 手臂
-    
-    # 添加联系信息
-    draw.text((100, 40), "遇到问题?", font=font, fill="#E3F2FD")
-    draw.text((100, 70), "联系开发者:", font=font, fill="#4FC3F7")
-    draw.text((100, 100), "contact@yourdomain.com", font=font, fill="#FFFFFF")
-    
-    return img
-
 
 # 将联系方式转换为Base64
 contact_logo = create_contact_logo()
