@@ -42,13 +42,13 @@ if st.button("📬 联系开发者"):
         with col1:
             st.image("https://img.icons8.com/ios-glyphs/30/000000/new-post.png", width=24)
         with col2:
-            st.markdown("[发送邮件](mailto:your_email@example.com)")
+            st.markdown("[发送邮件](zhen.h.dai@outlook.com)")
 
         col3, col4 = st.columns([1, 4])
         with col3:
             st.image("https://img.icons8.com/external-flat-juicy-fish/60/000000/external-form-ux-and-ui-flat-flat-juicy-fish.png", width=24)
         with col4:
-            st.markdown("[填写在线反馈表单](https://example.com/your-form)")
+            st.markdown("[填写在线反馈表单](https://docs.qq.com/form/page/DVFdraEFYeEdCZEJ6)")
 
         st.markdown("感谢您的反馈！我们会尽快回复。")
 
