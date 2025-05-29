@@ -13,15 +13,12 @@ st.set_page_config(
 
 with st.sidebar:
     st.header("设置")
-
-    # 添加一些设置项或其他功能按钮
-    st.button("📨 点我联系")
     
     # 添加垂直空间以将联系方式推到底部
-    st.markdown("&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;", unsafe_allow_html=True)
+    st.markdown("<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>", unsafe_allow_html=True)
 
-    # 底部联系方式展示
-    st.markdown("---")
+    # # 底部联系方式展示
+    # st.markdown("---")
     st.markdown("### 📬 联系方式")
     st.markdown("📧 邮箱: [your_email@example.com](mailto:your_email@example.com)")
     st.markdown("📱 微信: your_wechat_id")
