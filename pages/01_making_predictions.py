@@ -136,6 +136,20 @@ st.set_page_config(
 )
 
 
+with st.sidebar:
+    # st.header("设置")
+    
+    # 添加垂直空间以将联系方式推到底部
+    st.markdown("<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>", unsafe_allow_html=True)
+
+    # # 底部联系方式展示
+    # st.markdown("---")
+    st.markdown("### Contact us")
+    st.markdown("📧 Email: [zhen.h.dai@outlook.com](mailto:zhen.h.dai@outlook.com)")
+    # st.markdown("📱 微信: your_wechat_id")
+    st.markdown("[📝 feedback](https://docs.qq.com/form/page/DVFdraEFYeEdCZEJ6)")
+
+
 def run():
 	ros_name = ['HO∙','¹O₂','O₃','SO₄∙⁻','O₂∙⁻','3DOM*','MnO₄⁻','HOCl','Fe(VI)',\
 	'Cl∙','ClO⁻','CO₃∙⁻','HFe(VI)','Cl₂','NO₂∙','Cl₂∙⁻','C₂H₃O₃∙','Cu(III)','C₃H₅O₂∙', \
