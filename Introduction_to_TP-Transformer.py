@@ -11,7 +11,21 @@ st.set_page_config(
     initial_sidebar_state="auto" 
 )
 
+with st.sidebar:
+    st.header("设置")
 
+    # 添加一些设置项或其他功能按钮
+    st.button("📨 点我联系")
+    
+    # 添加垂直空间以将联系方式推到底部
+    st.markdown("&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;", unsafe_allow_html=True)
+
+    # 底部联系方式展示
+    st.markdown("---")
+    st.markdown("### 📬 联系方式")
+    st.markdown("📧 邮箱: [your_email@example.com](mailto:your_email@example.com)")
+    st.markdown("📱 微信: your_wechat_id")
+    st.markdown("[📝 填写反馈表单](https://example.com)")
 
 
 
@@ -177,29 +191,8 @@ particles_js = """<!DOCTYPE html>
 </body>
 </html>
 """
-with st.sidebar:
-    st.header("📬 联系开发者")
-    if st.button("📨 点我联系"):
-        st.session_state.show_contact = not st.session_state.show_contact
 
-# 主页面显示联系信息
-if st.session_state.show_contact:
-    with st.expander("📞 开发者联系方式", expanded=True):
-        st.markdown("您可以通过以下方式联系我：")
 
-        col1, col2 = st.columns([1, 5])
-        with col1:
-            st.image("https://img.icons8.com/ios-glyphs/30/000000/new-post.png", width=24)
-        with col2:
-            st.markdown("[发送邮件](mailto:your_email@example.com)")
-
-        col3, col4 = st.columns([1, 5])
-        with col3:
-            st.image("https://img.icons8.com/external-flat-juicy-fish/60/000000/external-form-ux-and-ui-flat-flat-juicy-fish.png", width=24)
-        with col4:
-            st.markdown("[在线反馈表单](https://example.com/your-form)")
-
-        st.markdown("感谢您的反馈！我们会尽快回复。")
 
 if "has_snowed" not in st.session_state:
     st.snow()
