@@ -16,10 +16,11 @@ st.set_page_config(
     initial_sidebar_state="auto" 
 )
 
-st.sidebar.markdown("## 联系方式")
-st.sidebar.markdown("📧 邮箱: your_email@example.com")
-st.sidebar.markdown("📱 微信: your_wechat_id")
-st.sidebar.markdown("[点击填写反馈表单](https://example.com)")
+st.sidebar.markdown("## Contact us")
+st.sidebar.markdown("📧 Email: zhen.h.dai@outlook.com")
+st.sidebar.markdown("📱 Wechat: your_wechat_id")
+st.sidebar.markdown("[feedback](https://example.com)")
+
 visitor = pd.read_csv("visi_num.txt")
 visi_num = visitor['num'][0]
 
