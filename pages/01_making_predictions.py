@@ -208,12 +208,19 @@ def run():
 
 	st.subheader('⚖️Specify probability thresholds')
 	cols = st.columns(5)
+	# default_values = [
+	#     0.991352424,  # top1
+	#     0.364181593,  # top2
+	#     0.237839789,  # top3
+	#     0.181993350,  # top4
+	#     0.140569091   # top5
+	# ]
 	default_values = [
-	    0.991352424,  # top1
-	    0.364181593,  # top2
-	    0.237839789,  # top3
-	    0.181993350,  # top4
-	    0.140569091   # top5
+	    0.960598536,  # top1
+	    0.556953884,  # top2
+	    0.636605102,  # top3
+	    0.509869614,  # top4
+	    0.474151535   # top5
 	]
 	
 	thresholds = {}
