@@ -305,15 +305,11 @@ def run():
 
 		
 		dp_smis = pd.read_csv(opt_tsl.output,header=None)
-
-		
-
-		
 		confid = pd.read_csv(
 			opt_tsl.output.replace(".txt", "_confidence.csv"),
 			header=None, names=["confidence"]
 		)
-		smis_li=[".".join(list(set((cano_smi("".join(dp_smi.split(" ")))).split(".")))) for dp_smi in dp_smis[0]]
+		smis_li=[".".join(list(set(cano_smi("".join(dp_smi.split(" "))).split(".")))) for dp_smi in dp_smis[0]]
 		if len(smis_li) != 5:
 			smis_li += [""] * (5 - len(smis_li))
 		# recurr_list = []
@@ -331,10 +327,10 @@ def run():
 		# 	f"**top{i}:** `{smis_li[i-1] + " "}`" for i in range(1,6)]), 
 		# 			   unsafe_allow_html=True
 		# 			  )
-		# message_container.markdown("<br>".join([
-		# 	    f"<b>top{i}:</b> <span style='color:{"#00ff00" if confid['confidence'][i-1] >= np.float64(thresholds[i-1]) else "#ff9900"}; font-family: monospace;'>{smis_li[i-1]}</span>"
-		# 	    for i in range(1, 6)
-		# 	]), unsafe_allow_html=True)
+		message_container.markdown("<br>".join([
+			    f"<b>top{i}:</b> <span style='color:{"#00ff00" if confid['confidence'][i-1] >= np.float64(thresholds[i-1]) else "#ff9900"}; font-family: monospace;'>{smis_li[i-1]}</span>"
+			    for i in range(1, 6)
+			]), unsafe_allow_html=True)
 		 
 
 		# st.markdown(",".join([f"**top{i}:** `{smis_li[i-1]}`" for i in range(1,11)])) 这行速度太慢了
