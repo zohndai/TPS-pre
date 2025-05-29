@@ -33,6 +33,26 @@ visitor['num'][0] += 1
 st.metric(label=f'👀page views: {visi_num}', value='')
 visitor.to_csv("visi_num.txt", index=False)
 
+
+if st.button("📬 联系开发者"):
+    with st.modal("📞 联系开发者"):
+        st.markdown("您可以通过以下方式联系我：")
+
+        col1, col2 = st.columns([1, 4])
+        with col1:
+            st.image("https://img.icons8.com/ios-glyphs/30/000000/new-post.png", width=24)
+        with col2:
+            st.markdown("[发送邮件](mailto:your_email@example.com)")
+
+        col3, col4 = st.columns([1, 4])
+        with col3:
+            st.image("https://img.icons8.com/external-flat-juicy-fish/60/000000/external-form-ux-and-ui-flat-flat-juicy-fish.png", width=24)
+        with col4:
+            st.markdown("[填写在线反馈表单](https://example.com/your-form)")
+
+        st.markdown("感谢您的反馈！我们会尽快回复。")
+
+
 TEXT1 = """
         <body style='text-align: justify; color: black;'>
         <p>✨The TP-Transformer platform is powered by advanced machine learning models to assist users in predicting the transformation products of aqueous organic 
