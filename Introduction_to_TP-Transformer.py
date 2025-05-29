@@ -22,6 +22,8 @@ st.set_page_config(
 
 visitor = pd.read_csv("visi_num.txt")
 visi_num = visitor['num'][0]
+if "show_contact" not in st.session_state:
+    st.session_state["show_contact"] = False
 
 if 'visitor_count' not in st.session_state:
 	st.session_state.visitor_count = int(visi_num)
