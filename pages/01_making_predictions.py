@@ -138,7 +138,7 @@ st.set_page_config(
 
 with st.sidebar:
     st.markdown("""
-    &lt;style&gt;
+    <style>
     /* 去除expander的边框和阴影 */
     .streamlit-expander {
         border: none;
@@ -149,7 +149,7 @@ with st.sidebar:
     .streamlit-expanderHeader {
         border-bottom: none;
     }
-    &lt;/style&gt;
+    </style>
 """, unsafe_allow_html=True)
     # st.header("contact")
     # st.markdown("<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>", unsafe_allow_html=True)
