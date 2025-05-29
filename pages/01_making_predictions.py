@@ -138,10 +138,11 @@ st.set_page_config(
 
 with st.sidebar:
     # st.header("contact")
+    st.markdown("<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>", unsafe_allow_html=True)
     with st.expander("📞Contact us"):
 		# st.write('You can get SMILES of any molecules from PubChem https://pubchem.ncbi.nlm.nih.gov/ by typing Chemical name or ACS number')
     # 添加垂直空间以将联系方式推到底部
-    # st.markdown("<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>", unsafe_allow_html=True)
+    
 	
     # # 底部联系方式展示
     # st.markdown("---")
