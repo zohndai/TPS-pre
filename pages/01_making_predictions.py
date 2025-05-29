@@ -145,10 +145,10 @@ with st.sidebar:
 	
     # # 底部联系方式展示
     # st.markdown("---")
-    st.markdown("### Contact us")
-    st.markdown("📧 Email: [zhen.h.dai@outlook.com](mailto:zhen.h.dai@outlook.com)")
-    # st.markdown("📱 Wechat: your_wechat_id")
-    st.markdown("[📝 feedback](https://docs.qq.com/form/page/DVFdraEFYeEdCZEJ6)")
+	    st.markdown("### Contact us")
+	    st.markdown("📧 Email: [zhen.h.dai@outlook.com](mailto:zhen.h.dai@outlook.com)")
+	    # st.markdown("📱 Wechat: your_wechat_id")
+	    st.markdown("[📝 feedback](https://docs.qq.com/form/page/DVFdraEFYeEdCZEJ6)")
 
 
 def run():
