@@ -165,7 +165,7 @@ def get_thred(ros, method):
 		return oh_thred
 	if ros == "¹O₂":
 		return singlet_O_thred
-	if all(ros in ['','3DOM*','3OM*'], method in ["UV light", "Visible light", "Sunlight", "Infrared"]):
+	if all([ros in ['','3DOM*','3OM*'], method in ["UV light", "Visible light", "Sunlight", "Infrared"]]):
 		return photo_thred
 	else:
 		return default_thred
