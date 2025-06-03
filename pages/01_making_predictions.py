@@ -128,6 +128,48 @@ def build_translator(opt, report_score, logger=None, out_file=None):
     )
     return translator
 
+
+default_thred = [
+    0.983835187,  # top1
+    0.363675185,  # top2
+    0.300792199,  # top3
+    0.336410101,  # top4
+    0.408437781   # top5
+]
+oh_thred = [
+    0.973063019,  # top1
+    0.365850866,  # top2
+    0.302991391999999,  # top3
+    0.29491562,  # top4
+    0.302711783   # top5
+]
+
+singlet_O_thred = [
+    0.897984302,  # top1
+    0.112246399,  # top2
+    0.136595739,  # top3
+    0.180508057,  # top4
+    0.181956418999999   # top5
+]
+
+photo_thred = [
+    0.897984302,  # top1
+    0.112246399,  # top2
+    0.136595739,  # top3
+    0.180508057,  # top4
+    0.181956418999999   # top5
+]
+
+def get_thred(ros, method):
+	if ros == "HO∙":
+		return oh_thred
+	if ros == "¹O₂":
+		return singlet_O_thred
+	if and(ros in ['','3DOM*','3OM*'], method in ["UV light", "Visible light", "Sunlight", "Infrared"]):
+		return photo_thred
+	else:
+		return default_thred
+		
 st.set_page_config(
     page_title="Welcome to TP-Transformer",    
     page_icon="log.ico",        
@@ -160,7 +202,7 @@ def run():
 	'[O-][I+3]([O-])([O-])[O-]','[Mn+2].[Mn+2].[O-2].[O-2]','NCl','BrBr','[O][Cl+][O-]','[O][N+](=O)[O-]','[I]','[O-]O','[O]C(=O)O',\
 	'[O]S(=O)(=O)OOS(=O)(=O)[O-]','[O]S(=O)[O-]','[O-][I+2]([O-])[O-]','[Fe+3]','O=[N+]=O','OI', 'O', '']
 	
-	acti_methd=["UV light", "Heat", "Visible light", "Microwave", "Electricity", "Ultrasound", "Sunlight", " Infrared", "No energy input"]
+	acti_methd=["UV light", "Heat", "Visible light", "Microwave", "Electricity", "Ultrasound", "Sunlight", "Infrared", "No energy input"]
 	methd_tokens=["ul", "heat", "vl", "MW", "E", "US", "sul", "rl", ""]
 	
 	st.subheader('🔬What pollutant?')
@@ -201,7 +243,7 @@ def run():
 	
 	st.subheader("⚡What energy input")
 	methd_selct=st.selectbox("Please select the input energy for the ROSs generation",("UV light", "Heat", "Visible light", \
-		       "Microwave", "Electricity", "Ultrasound", "Sunlight", " Infrared", "No energy input"),8)
+		       "Microwave", "Electricity", "Ultrasound", "Sunlight", "Infrared", "No energy input"),8)
 	
 	st.subheader('🌡️Please input the reaction pH for pollutant degradation')
 	pH_value = st.text_input("Keep two decimal places","")
@@ -219,20 +261,8 @@ def run():
 
 	st.subheader('⚖️Specify probability thresholds')
 	cols = st.columns(5)
-	default_values = [
-	    0.991352424,  # top1
-	    0.364181593,  # top2
-	    0.237839789,  # top3
-	    0.181993350,  # top4
-	    0.140569091   # top5
-	]
-	# default_values = [
-	#     0.960598536,  # top1
-	#     0.556953884,  # top2
-	#     0.636605102,  # top3
-	#     0.509869614,  # top4
-	#     0.474151535   # top5
-	# ]
+
+	default_values = get_thred(ros_selct, methd_selct)
 	
 	thresholds = {}
 	for i in range(5):
