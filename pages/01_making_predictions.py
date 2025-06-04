@@ -62,38 +62,53 @@ def load_model(model_name, cache_dir):
 	# file_id = fd
 	# model_path = model_name
 	repo_name = "zohndai/tp_transformer-oxi-photo"
-	hf_hub_download(repo_id=repo_name, filename=model_name, cache_dir=cache_dir)
+	model_path = hf_hub_download(repo_id=repo_name, filename=model_name, cache_dir=cache_dir)
+	return model_path
 	# download_url = f'https://drive.google.com/uc?id={file_id}'
 	# download_url = f"https://huggingface.co/zohndai/tp_transformer-oxi-photo/blob/main/{file_id}"
 	# gdown.download(download_url, model_path, quiet=True)
 #if col1.button('Get the prediction')
 @st.cache_data
+def load_model(model_name, cache_dir="models"): 
+    repo_name = "zohndai/tp_transformer-oxi-photo"
+    model_path = hf_hub_download(repo_id=repo_name, filename=model_name, cache_dir=cache_dir)
+    return model_path
+
+# Streamlit 缓存 + 友好提示
+@st.cache_data
 def download():
-	name = 'Chem_Oxi_photo'
-	destination_dir = 'models'
-	os.makedirs(destination_dir, exist_ok=True)
-	message_container = st.empty()
-	message_container.text("⏳Downloading the models... Please wait.")
-	#https://drive.google.com/file/d/1MTK_uL2hyS2QJrmq4HjaVCdJNLkTf55s/view?usp=drive_link
-	#1fa4ErVvXjZzbLCZzJEsQ6I9nelAR7iCu
-	#1NmXn3OhaAexvfhdTwZQxq8gbKaF_GV6u
-	# https://drive.google.com/file/d//view?usp=sharing
+    name = 'Chem_Oxi_photo'
+    destination_dir = 'models'
+    os.makedirs(destination_dir, exist_ok=True)
+
+    message_container = st.empty()
+    message_container.text("⏳ Downloading the model... Please waite")
+
+    # 映射：远程模型文件名 =&gt; 本地保存名（不含扩展名）
+    fd_dict = {
+        'fine_tune_step_49320_aop_plus_photo_best.pt': f'{name}_2025_0508'
+    }
+
+    for remote_file, local_base_name in fd_dict.items():
+        # 下载模型
+        model_path = load_model(remote_file, cache_dir=destination_dir)
+
+        # 重命名下载的模型为自定义名称
+        current_file_path = model_path
+        new_file_path = os.path.join(destination_dir, local_base_name + ".pt")
+
+        if not os.path.exists(new_file_path):
+            os.rename(current_file_path, new_file_path)
+
+        time.sleep(1)
+
+    message_container.text("🚀 Model is ready! ")
+    return new_file_path
+
+
+
+
 	
-	# 1NTYBl070koP1fglDnTkLPxOOP94ehlAv
-	fd_dict = {'fine_tune_step_49320_aop_plus_photo_best.pt':f'{name}_2025_0508'}
-	#https://drive.google.com/file/d/1NTYBl070koP1fglDnTkLPxOOP94ehlAv/view?usp=sharing
-	for fd in fd_dict.keys():
-		fd_file = fd
-		model_name = fd_dict[fd]
-		model_path = os.path.join(destination_dir, model_name)
-		load_model(fd_file, model_path)
-		time.sleep(4)
-		current_file_path = f'models/{model_name}'
-		new_file_path = f'models/{model_name}.pt'
-		if not os.path.exists(new_file_path):
-		    os.rename(current_file_path, new_file_path)
-	message_container.text("🚀Model is ready!")
-	return new_file_path
 @st.cache_data	
 def load_test_model(opt, model_path=None):
     if model_path is None:
