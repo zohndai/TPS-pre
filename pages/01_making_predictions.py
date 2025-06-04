@@ -12,7 +12,8 @@ import torch
 from rdkit.Chem import Draw
 #import matplotlib.pyplot as plt
 import os
-import gdown
+# import gdown
+from huggingface_hub import hf_hub_download
 import time
 import codecs
 import glob
@@ -56,15 +57,19 @@ def cano_smi(smi):
 	cano_smiles = ".".join(smi_list)
 	return cano_smiles	      
 @st.cache_resource
-def load_model(fd,model_name):
-    file_id = fd
-    model_path = model_name
-    download_url = f'https://drive.google.com/uc?id={file_id}'
-    gdown.download(download_url, model_path, quiet=True)
+def load_model(model_name, cache_dir):
+	#cfine_tune_step_49320_aop_plus_photo_best.pt
+	# file_id = fd
+	# model_path = model_name
+	repo_name = "https://huggingface.co/zohndai/tp_transformer-oxi-photo/blob/main/"
+	hg_hub_download(repo_id=repo_name, filename=model_name, cache_dir=cache_dir)
+	# download_url = f'https://drive.google.com/uc?id={file_id}'
+	# download_url = f"https://huggingface.co/zohndai/tp_transformer-oxi-photo/blob/main/{file_id}"
+	# gdown.download(download_url, model_path, quiet=True)
 #if col1.button('Get the prediction')
 @st.cache_data
 def download():
-	name = 'fine_tune_step_42480'
+	name = 'Chem_Oxi_photo'
 	destination_dir = 'models'
 	os.makedirs(destination_dir, exist_ok=True)
 	message_container = st.empty()
@@ -75,7 +80,7 @@ def download():
 	# https://drive.google.com/file/d//view?usp=sharing
 	
 	# 1NTYBl070koP1fglDnTkLPxOOP94ehlAv
-	fd_dict = {'1aWbCO_uQwDiw8rdoQNTIKBpV6JpSdbYt':f'{name}_2025_0508'}
+	fd_dict = {'fine_tune_step_49320_aop_plus_photo_best.pt':f'{name}_2025_0508'}
 	#https://drive.google.com/file/d/1NTYBl070koP1fglDnTkLPxOOP94ehlAv/view?usp=sharing
 	for fd in fd_dict.keys():
 		fd_file = fd
