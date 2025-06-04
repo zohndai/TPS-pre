@@ -91,8 +91,9 @@ def download():
 
     # for remote_file, local_base_name in fd_dict.items():
         # 下载模型
+	remote_file = "fine_tune_step_49320_aop_plus_photo_best.pt"
 	model_path = load_model(remote_file, cache_dir=destination_dir)
-	time.sleep(1)
+	time.sleep(1)s
 
 	message_container.text("🚀 Model is ready! ")
 	return model_path
