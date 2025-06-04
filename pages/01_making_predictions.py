@@ -73,37 +73,36 @@ def load_model(model_name, cache_dir="models"):
     repo_name = "zohndai/tp_transformer-oxi-photo"
     model_path = hf_hub_download(repo_id=repo_name, filename=model_name, cache_dir=cache_dir)
     return model_path
-
+	
 # Streamlit 缓存 + 友好提示
 @st.cache_data
 def download():
-    name = 'Chem_Oxi_photo'
-    destination_dir = 'models'
-    os.makedirs(destination_dir, exist_ok=True)
-
-    message_container = st.empty()
-    message_container.text("⏳ Downloading the model... Please waite")
+	# name = 'Chem_Oxi_photo'
+	destination_dir = 'models'
+	os.makedirs(destination_dir, exist_ok=True)
+	
+	message_container = st.empty()
+	message_container.text("⏳ Downloading the model... Please waite")
 
     # 映射：远程模型文件名 =&gt; 本地保存名（不含扩展名）
-    fd_dict = {
-        'fine_tune_step_49320_aop_plus_photo_best.pt': f'{name}_2025_0508'
-    }
+    # fd_dict = {
+    #     'fine_tune_step_49320_aop_plus_photo_best.pt': f'{name}_2025_0508'
+    # }
 
-    for remote_file, local_base_name in fd_dict.items():
+    # for remote_file, local_base_name in fd_dict.items():
         # 下载模型
-        model_path = load_model(remote_file, cache_dir=destination_dir)
+	model_path = load_model(remote_file, cache_dir=destination_dir)
+        # # 重命名下载的模型为自定义名称
+        # current_file_path = model_path
+        # new_file_path = os.path.join(destination_dir, local_base_name + ".pt")
 
-        # 重命名下载的模型为自定义名称
-        current_file_path = model_path
-        new_file_path = os.path.join(destination_dir, local_base_name + ".pt")
-
-        if not os.path.exists(new_file_path):
-            os.rename(current_file_path, new_file_path)
+        # if not os.path.exists(new_file_path):
+        #     os.rename(current_file_path, new_file_path)
 
         time.sleep(1)
 
-    message_container.text("🚀 Model is ready! ")
-    return new_file_path
+	message_container.text("🚀 Model is ready! ")
+	return model_path
 
 
 
