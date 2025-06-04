@@ -62,7 +62,7 @@ def load_model(model_name, cache_dir):
 	# file_id = fd
 	# model_path = model_name
 	repo_name = "https://huggingface.co/zohndai/tp_transformer-oxi-photo/blob/main/"
-	hg_hub_download(repo_id=repo_name, filename=model_name, cache_dir=cache_dir)
+	hf_hub_download(repo_id=repo_name, filename=model_name, cache_dir=cache_dir)
 	# download_url = f'https://drive.google.com/uc?id={file_id}'
 	# download_url = f"https://huggingface.co/zohndai/tp_transformer-oxi-photo/blob/main/{file_id}"
 	# gdown.download(download_url, model_path, quiet=True)
