@@ -92,6 +92,10 @@ def download():
     # for remote_file, local_base_name in fd_dict.items():
         # 下载模型
 	model_path = load_model(remote_file, cache_dir=destination_dir)
+	time.sleep(1)
+
+	message_container.text("🚀 Model is ready! ")
+	return model_path
         # # 重命名下载的模型为自定义名称
         # current_file_path = model_path
         # new_file_path = os.path.join(destination_dir, local_base_name + ".pt")
@@ -99,10 +103,6 @@ def download():
         # if not os.path.exists(new_file_path):
         #     os.rename(current_file_path, new_file_path)
 
-        time.sleep(1)
-
-	message_container.text("🚀 Model is ready! ")
-	return model_path
 
 
 
