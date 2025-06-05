@@ -84,7 +84,7 @@ def download():
 	message_container = st.empty()
 	message_container.text("⏳ Downloading the model... Please waite")
 
-    # 映射：远程模型文件名 =&gt; 本地保存名（不含扩展名）
+
     # fd_dict = {
     #     'fine_tune_step_49320_aop_plus_photo_best.pt': f'{name}_2025_0508'
     # }
@@ -93,7 +93,7 @@ def download():
         # 下载模型
 	remote_file = "fine_tune_step_49320_aop_plus_photo_best.pt"
 	model_path = load_model(remote_file, cache_dir=destination_dir)
-	time.sleep(1)
+	time.sleep(0.1)
 
 	message_container.text("🚀 Model is ready! ")
 	return model_path
