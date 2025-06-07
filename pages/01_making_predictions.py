@@ -203,7 +203,21 @@ st.set_page_config(
     initial_sidebar_state="auto"
 )
 
+st.markdown(
+    """
+    &lt;style&gt;
+    /* 设置 sidebar 的宽度 */
+    [data-testid="stSidebar"] {
+        width: 300px;
+    }
+    [data-testid="stSidebar"] &gt; div:first-child {
+        width: 300px;
+    }
+    &lt;/style&gt;
 
+    """,
+    unsafe_allow_html=True
+)
 with st.sidebar:
 	with st.expander("🛠️Specify prediction parameters"):
 		model_select=st.selectbox("Select model dimension",("256", "512"), 1)
