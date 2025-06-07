@@ -201,9 +201,10 @@ st.set_page_config(
 
 
 with st.sidebar:
-    with st.expander("📞Contact developer"):
+	model_selct=st.selectbox("Select a model",("256", "512",512)
+	with st.expander("📞Contact developer"):
 		# st.write('You can get SMILES of any molecules from PubChem https://pubchem.ncbi.nlm.nih.gov/ by typing Chemical name or ACS number')
-    # st.markdown("---")
+	# st.markdown("---")
 	    # st.markdown("### Contact us")
 	    st.markdown("📧 Email: [zhen.h.dai@outlook.com](mailto:zhen.h.dai@outlook.com)")
 	    # st.markdown("📱 Wechat: your_wechat_id")
