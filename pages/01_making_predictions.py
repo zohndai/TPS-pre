@@ -206,14 +206,14 @@ st.set_page_config(
 
 
 with st.sidebar:
-	model_select=st.selectbox("Select model dimension",("256", "512"), 1)
+	with st.expander("🛠️Specify prediction parameters"):
+		model_select=st.selectbox("Select model dimension",("256", "512"), 1)
 	with st.expander("📞Contact developer"):
-		# st.write('You can get SMILES of any molecules from PubChem https://pubchem.ncbi.nlm.nih.gov/ by typing Chemical name or ACS number')
-	# st.markdown("---")
-	    # st.markdown("### Contact us")
-	    st.markdown("📧 Email: [zhen.h.dai@outlook.com](mailto:zhen.h.dai@outlook.com)")
-	    # st.markdown("📱 Wechat: your_wechat_id")
-	    st.markdown("[📝 feedback](https://docs.qq.com/form/page/DVFdraEFYeEdCZEJ6)")
+		
+		st.markdown("📧 Email: [zhen.h.dai@outlook.com](mailto:zhen.h.dai@outlook.com)")
+		# st.markdown("📱 Wechat: your_wechat_id")
+		st.markdown("[📝 feedback](https://docs.qq.com/form/page/DVFdraEFYeEdCZEJ6)")
+
 
 def run():
 	ros_name = ['HO∙','¹O₂','O₃','SO₄∙⁻','O₂∙⁻','3DOM*','MnO₄⁻','HOCl','Fe(VI)',\
