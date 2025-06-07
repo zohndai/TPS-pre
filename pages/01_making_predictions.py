@@ -40,7 +40,7 @@ from PIL import Image
 
 
 
-model_collec = {"256":"fine_tune_step_49320_aop_plus_photo_best-256.pt", "512": "fine_tune_step_44460_best-512.pt"} 
+model_collec = {"256":"fine_tune_step_49320_aop_plus_photo_best.pt", "512": "fine_tune_step_44460_best-512.pt"} 
 model_ver_collec = {"256":"20250608-1.0.0", "512": "20250508-1.1.0"} 
 
 def smi_tokenize(smi):
@@ -206,7 +206,7 @@ st.set_page_config(
 
 
 with st.sidebar:
-	model_select=st.selectbox("Select a model",("256", "512"), 1)
+	model_select=st.selectbox("Select model dimension",("256", "512"), 1)
 	with st.expander("📞Contact developer"):
 		# st.write('You can get SMILES of any molecules from PubChem https://pubchem.ncbi.nlm.nih.gov/ by typing Chemical name or ACS number')
 	# st.markdown("---")
