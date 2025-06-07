@@ -40,7 +40,7 @@ from PIL import Image
 
 
 
-model_collec = {"256":"fine_tune_step_49320_aop_plus_photo_best-256.pt", "512": "fine_tune_step_49320_aop_plus_photo_best.pt"} 
+model_collec = {"256":"fine_tune_step_49320_aop_plus_photo_best-256.pt", "512": "fine_tune_step_44460_best-512.pt"} 
 model_ver_collec = {"256":"20250608-1.0.0", "512": "20250508-1.1.0"} 
 
 def smi_tokenize(smi):
@@ -333,7 +333,7 @@ def run():
 		# 	st.stop()
 		model_path = download(model_select)
 		message_container = st.empty()
-		message_container.text("🤖model version:TP-Transformer-%s"%(model_ver_collec[model_select]))
+		message_container.text("🤖model version:TP-Transformer-%s"%(model_ver_collec[model_select] + "-dm-" + model_select))
 	
 		parser_tsl = ArgumentParser(description="translate.py")
 		opts.config_opts(parser_tsl)
