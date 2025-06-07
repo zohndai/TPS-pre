@@ -204,7 +204,7 @@ st.set_page_config(
 )
 
 with st.sidebar:
-	with st.expander("🛠 Specify prediction parameters"):
+	with st.expander("🛠 Prediction parameters"):
 		model_select=st.selectbox("Select model dimension",("256", "512"), 0)
 
 		st.subheader('💥Select ROSs that drive pollutant degradation')
