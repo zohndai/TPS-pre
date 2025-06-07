@@ -38,6 +38,11 @@ from onmt.utils.misc import split_corpus
 import re
 from PIL import Image
 
+
+
+model_collec = {"256":"fine_tune_step_49320_aop_plus_photo_best-256.pt", "512": "fine_tune_step_49320_aop_plus_photo_best.pt"} 
+model_ver_collec = {"256":"20250608-1.0.0", "512": "20250508-1.1.0"} 
+
 def smi_tokenize(smi):
     pattern = "(\[[^\]]+]|Br?|Cl?|su|OM|D|N|O|S|P|F|I|b|c|n|o|s|p|\(|\)|\.|=|#|-|\+|\\\\|\/|:|~|@|\?|>|\*|\$|\%[0-9]{2}|[0-9]|MW|u|v|r|l|E|US|heat|<|_)"
     compiled_pt = re.compile(pattern)
@@ -56,14 +61,14 @@ def cano_smi(smi):
 			smi_list[i] = smi_list[i]		
 	cano_smiles = ".".join(smi_list)
 	return cano_smiles	      
-@st.cache_resource
-def load_model(model_name, cache_dir):
+# @st.cache_resource
+# def load_model(model_name, cache_dir):
 	#cfine_tune_step_49320_aop_plus_photo_best.pt
 	# file_id = fd
 	# model_path = model_name
-	repo_name = "zohndai/tp_transformer-oxi-photo"
-	model_path = hf_hub_download(repo_id=repo_name, filename=model_name, cache_dir=cache_dir)
-	return model_path
+	# repo_name = "zohndai/tp_transformer-oxi-photo"
+	# model_path = hf_hub_download(repo_id=repo_name, filename=model_name, cache_dir=cache_dir)
+	# return model_path
 	# download_url = f'https://drive.google.com/uc?id={file_id}'
 	# download_url = f"https://huggingface.co/zohndai/tp_transformer-oxi-photo/blob/main/{file_id}"
 	# gdown.download(download_url, model_path, quiet=True)
@@ -76,7 +81,7 @@ def load_model(model_name, cache_dir="models"):
 	
 # Streamlit 缓存 + 友好提示
 @st.cache_data
-def download():
+def download(dimension):
 	# name = 'Chem_Oxi_photo'
 	destination_dir = 'models'
 	os.makedirs(destination_dir, exist_ok=True)
@@ -91,7 +96,7 @@ def download():
 
     # for remote_file, local_base_name in fd_dict.items():
         # 下载模型
-	remote_file = "fine_tune_step_49320_aop_plus_photo_best.pt"
+	remote_file = model_collec[dimension]
 	model_path = load_model(remote_file, cache_dir=destination_dir)
 	time.sleep(0.1)
 
@@ -201,7 +206,7 @@ st.set_page_config(
 
 
 with st.sidebar:
-	model_selct=st.selectbox("Select a model",(256, 512), 1)
+	model_selct=st.selectbox("Select a model",("256", "512"), 1)
 	with st.expander("📞Contact developer"):
 		# st.write('You can get SMILES of any molecules from PubChem https://pubchem.ncbi.nlm.nih.gov/ by typing Chemical name or ACS number')
 	# st.markdown("---")
@@ -209,7 +214,6 @@ with st.sidebar:
 	    st.markdown("📧 Email: [zhen.h.dai@outlook.com](mailto:zhen.h.dai@outlook.com)")
 	    # st.markdown("📱 Wechat: your_wechat_id")
 	    st.markdown("[📝 feedback](https://docs.qq.com/form/page/DVFdraEFYeEdCZEJ6)")
-
 
 def run():
 	ros_name = ['HO∙','¹O₂','O₃','SO₄∙⁻','O₂∙⁻','3DOM*','MnO₄⁻','HOCl','Fe(VI)',\
@@ -327,9 +331,9 @@ def run():
 		# if all([not(prec), not(ros_smi)]):
 		# 	st.warning("⚠️At least one of 'ROSs' and 'precursors' should be given, please check your input again")
 		# 	st.stop()
-		model_path = download()
+		model_path = download(model_selct)
 		message_container = st.empty()
-		message_container.text("🤖model version:TP-Transformer-1.0.20250508")
+		message_container.text("🤖model version:TP-Transformer-%s"%(model_ver_collec[model_select]))
 	
 		parser_tsl = ArgumentParser(description="translate.py")
 		opts.config_opts(parser_tsl)
