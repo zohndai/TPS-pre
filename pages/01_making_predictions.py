@@ -258,7 +258,7 @@ with st.sidebar:
 				    min_value=0.0,
 				    max_value=1.0,
 				    value=default_values[i],
-				    format="%.6f",
+				    format="%.8f",
 				    step=1e-9,
 				    help=f"default: {default_values[i]:.9f}"
 				)
