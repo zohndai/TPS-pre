@@ -253,13 +253,13 @@ with st.sidebar:
 			j = i if i < 3 else i-3
 			with thred_cols[j]:
 				thresholds[i] = st.number_input(
-				    label=f"top{i+1} threshold:",
+				    label=f"top{i+1}:",
 				    min_value=0.0,
 				    max_value=1.0,
 				    value=default_values[i],
 				    format="%.9f",
 				    step=1e-9,
-				    help=f"default: {default_values[i]:.9f}"
+				    help=f"default: {default_values[i]:.6f}"
 				)
 
 
