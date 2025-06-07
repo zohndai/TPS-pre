@@ -203,26 +203,11 @@ st.set_page_config(
     initial_sidebar_state="auto"
 )
 
-st.markdown(
-    """
-    &lt;style&gt;
-    /* 设置 sidebar 的宽度 */
-    [data-testid="stSidebar"] {
-        width: 300px;
-    }
-    [data-testid="stSidebar"] &gt; div:first-child {
-        width: 300px;
-    }
-    &lt;/style&gt;
-
-    """,
-    unsafe_allow_html=True
-)
 with st.sidebar:
 	with st.expander("🛠️Specify prediction parameters"):
 		model_select=st.selectbox("Select model dimension",("256", "512"), 1)
 
-		st.subheader('💥Please select the ROSs that drive the pollutant degradation')
+		st.subheader('💥Select ROSs that drive pollutant degradation')
 		ros_selct=st.selectbox('What ROSs? If not sure, select "Unknown"', ('HO∙','¹O₂','O₃','SO₄∙⁻','O₂∙⁻','3DOM*','MnO₄⁻','HOCl','Fe(VI)',\
 		'Cl∙','ClO⁻','CO₃∙⁻','HFe(VI)','Cl₂','NO₂∙','Cl₂∙⁻','C₂H₃O₃∙','Cu(III)','C₃H₅O₂∙', \
 		'NO∙','Fe(V)','Mn(III)', 'Fe(IV)','HSO₄∙','Mn(V)','ClO∙','O₂','BrO⁻',\
@@ -241,7 +226,7 @@ with st.sidebar:
 		methd_selct=st.selectbox("Please select the input energy for the ROSs generation",("UV light", "Heat", "Visible light", \
 			       "Microwave", "Electricity", "Ultrasound", "Sunlight", "Infrared", "No energy input"),8)
 		
-		st.subheader('🌡️Please input the reaction pH for pollutant degradation')
+		st.subheader('🌡️Enter the reaction pH')
 		pH_value = st.text_input("Keep two decimal places","")
 	
 		
