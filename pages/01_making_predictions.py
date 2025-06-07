@@ -206,7 +206,7 @@ st.set_page_config(
 
 
 with st.sidebar:
-	model_selct=st.selectbox("Select a model",("256", "512"), 1)
+	model_select=st.selectbox("Select a model",("256", "512"), 1)
 	with st.expander("📞Contact developer"):
 		# st.write('You can get SMILES of any molecules from PubChem https://pubchem.ncbi.nlm.nih.gov/ by typing Chemical name or ACS number')
 	# st.markdown("---")
@@ -331,7 +331,7 @@ def run():
 		# if all([not(prec), not(ros_smi)]):
 		# 	st.warning("⚠️At least one of 'ROSs' and 'precursors' should be given, please check your input again")
 		# 	st.stop()
-		model_path = download(model_selct)
+		model_path = download(model_select)
 		message_container = st.empty()
 		message_container.text("🤖model version:TP-Transformer-%s"%(model_ver_collec[model_select]))
 	
