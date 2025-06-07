@@ -205,7 +205,7 @@ st.set_page_config(
 
 with st.sidebar:
 	with st.expander("🛠️Specify prediction parameters"):
-		model_select=st.selectbox("Select model dimension",("256", "512"), 1)
+		model_select=st.selectbox("Select model dimension",("256", "512"), 0)
 
 		st.subheader('💥Select ROSs that drive pollutant degradation')
 		ros_selct=st.selectbox('What ROSs? If not sure, select "Unknown"', ('HO∙','¹O₂','O₃','SO₄∙⁻','O₂∙⁻','3DOM*','MnO₄⁻','HOCl','Fe(VI)',\
