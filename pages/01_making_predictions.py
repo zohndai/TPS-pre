@@ -201,7 +201,7 @@ st.set_page_config(
 
 
 with st.sidebar:
-	model_selct=st.selectbox("Select a model",("256", "512",512)
+	model_selct=st.selectbox("Select a model",("256", "512",512))
 	with st.expander("📞Contact developer"):
 		# st.write('You can get SMILES of any molecules from PubChem https://pubchem.ncbi.nlm.nih.gov/ by typing Chemical name or ACS number')
 	# st.markdown("---")
