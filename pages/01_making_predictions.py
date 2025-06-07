@@ -260,7 +260,7 @@ with st.sidebar:
 				    value=default_values[i],
 				    format="%.9f",
 				    step=1e-9,
-				    help=f"default: {default_values[i]:.6f}"
+				    help=f"default: {default_values[i]:.4f}"
 				)
 
 
