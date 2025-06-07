@@ -241,14 +241,14 @@ with st.sidebar:
 		# "+" and "-" buttons for fine-tuning
 	
 		st.subheader('⚖️Specify probability thresholds')
-		thed_cols1 = st.columns(5)
-		thed_cols2 = st.columns(5)
+		thed_cols1 = st.columns(3)
+		thed_cols2 = st.columns(3)
 	
 		default_values = get_thred(ros_selct, methd_selct)
 		
 		thresholds = {}
 		
-		for i in range(3):
+		for i in range(5):
 			thred_cols = thed_cols1 if i < 3 else thed_cols2
 			j = i if i < 3 else i-3
 			with thred_cols[j]:
