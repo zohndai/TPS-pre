@@ -248,7 +248,7 @@ with st.sidebar:
 		
 		thresholds = {}
 		
-		for i in range(5):
+		for i in range(3):
 			thred_cols = thed_cols1 if i < 3 else thed_cols2
 			j = i if i < 3 else i-3
 			with thred_cols[j]:
