@@ -204,7 +204,7 @@ st.set_page_config(
 )
 
 with st.sidebar:
-	with st.expander("🛠️Specify prediction parameters"):
+	with st.expander("🛠 Specify prediction parameters"):
 		model_select=st.selectbox("Select model dimension",("256", "512"), 0)
 
 		st.subheader('💥Select ROSs that drive pollutant degradation')
@@ -268,7 +268,7 @@ with st.sidebar:
 
 
 	
-	with st.expander("📞Contact developer"):
+	with st.expander("☎ Contact developer"):
 		
 		st.markdown("📧 Email: [zhen.h.dai@outlook.com](mailto:zhen.h.dai@outlook.com)")
 		# st.markdown("📱 Wechat: your_wechat_id")
