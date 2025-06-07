@@ -61,18 +61,7 @@ def cano_smi(smi):
 			smi_list[i] = smi_list[i]		
 	cano_smiles = ".".join(smi_list)
 	return cano_smiles	      
-# @st.cache_resource
-# def load_model(model_name, cache_dir):
-	#cfine_tune_step_49320_aop_plus_photo_best.pt
-	# file_id = fd
-	# model_path = model_name
-	# repo_name = "zohndai/tp_transformer-oxi-photo"
-	# model_path = hf_hub_download(repo_id=repo_name, filename=model_name, cache_dir=cache_dir)
-	# return model_path
-	# download_url = f'https://drive.google.com/uc?id={file_id}'
-	# download_url = f"https://huggingface.co/zohndai/tp_transformer-oxi-photo/blob/main/{file_id}"
-	# gdown.download(download_url, model_path, quiet=True)
-#if col1.button('Get the prediction')
+
 @st.cache_data
 def load_model(model_name, cache_dir="models"): 
     repo_name = "zohndai/tp_transformer-oxi-photo"
@@ -110,10 +99,6 @@ def download(dimension):
         #     os.rename(current_file_path, new_file_path)
 
 
-
-
-
-	
 @st.cache_data	
 def load_test_model(opt, model_path=None):
     if model_path is None:
@@ -161,7 +146,7 @@ ros_name = ['HO∙','¹O₂','O₃','SO₄∙⁻','O₂∙⁻','3DOM*','MnO₄�
 	'Cr₂O₇²⁻','Br∙','IO⁻','³OM*', 'C₂H₃O₂∙','HOBr','HSO₅⁻',\
 	'IO₄⁻','Mn₂O₂','HNCl','Br₂','ClO₂∙','NO₃∙','I∙','HO₂⁻','HCO₃∙',\
 	'S₂O₈∙⁻','SO₃∙⁻','IO₃⁻','Fe(III)','NO₂⁺','HOI', 'O', "Unkown"]
-	ros_smis = ['[OH]','1O=O','O=[O+][O-]','[O]S(=O)(=O)[O-]','[O][O-]','3DOM*','O=[Mn](=O)(=O)[O-]','OCl','O=[Fe](=O)([O-])[O-]',\
+ros_smis = ['[OH]','1O=O','O=[O+][O-]','[O]S(=O)(=O)[O-]','[O][O-]','3DOM*','O=[Mn](=O)(=O)[O-]','OCl','O=[Fe](=O)([O-])[O-]',\
 	'[Cl]','[O-]Cl','[O]C(=O)[O-]','O=[Fe](=O)([O-])O','ClCl','O=[N+][O-]','Cl[Cl-]','CC(=O)O[O]','[Cu+3]','CCC([O])=O', \
 	'[N+][O-]','O=[Fe]([O-])([O-])[O-]','[Mn+3]', '[O-][Fe]([O-])([O-])[O-]','[O]S(=O)(=O)O','[Mn+5]','[O]Cl','O=O','[O-]Br',\
 	'O=[Cr](=O)([O-])O[Cr](=O)(=O)[O-]','[Br]','[O-]I','3OM*', 'CC([O])=O','OBr','O=S(=O)([O-])OO',\
