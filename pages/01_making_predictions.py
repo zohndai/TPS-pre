@@ -279,7 +279,7 @@ def run():
 	# molecule = st.text_input("molecular strcuture（SMILES）", default_smiles)
 	# Ketcher  molecule editor
 	st.markdown(f"✍Or manually draw the target pollutant below:")
-	poll = st_ketcher(default_mol,height=350)
+	poll = st_ketcher(default_mol,height=550)
 	# Showing molecule SMILES from editor
 	st.markdown(f"**current SMILES：** `{poll}`")
 
