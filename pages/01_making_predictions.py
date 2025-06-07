@@ -155,7 +155,21 @@ def build_translator(opt, report_score, logger=None, out_file=None):
     )
     return translator
 
-
+ros_name = ['HO∙','¹O₂','O₃','SO₄∙⁻','O₂∙⁻','3DOM*','MnO₄⁻','HOCl','Fe(VI)',\
+	'Cl∙','ClO⁻','CO₃∙⁻','HFe(VI)','Cl₂','NO₂∙','Cl₂∙⁻','C₂H₃O₃∙','Cu(III)','C₃H₅O₂∙', \
+	'NO∙','Fe(V)','Mn(III)', 'Fe(IV)','HSO₄∙','Mn(V)','ClO∙','O₂','BrO⁻',\
+	'Cr₂O₇²⁻','Br∙','IO⁻','³OM*', 'C₂H₃O₂∙','HOBr','HSO₅⁻',\
+	'IO₄⁻','Mn₂O₂','HNCl','Br₂','ClO₂∙','NO₃∙','I∙','HO₂⁻','HCO₃∙',\
+	'S₂O₈∙⁻','SO₃∙⁻','IO₃⁻','Fe(III)','NO₂⁺','HOI', 'O', "Unkown"]
+	ros_smis = ['[OH]','1O=O','O=[O+][O-]','[O]S(=O)(=O)[O-]','[O][O-]','3DOM*','O=[Mn](=O)(=O)[O-]','OCl','O=[Fe](=O)([O-])[O-]',\
+	'[Cl]','[O-]Cl','[O]C(=O)[O-]','O=[Fe](=O)([O-])O','ClCl','O=[N+][O-]','Cl[Cl-]','CC(=O)O[O]','[Cu+3]','CCC([O])=O', \
+	'[N+][O-]','O=[Fe]([O-])([O-])[O-]','[Mn+3]', '[O-][Fe]([O-])([O-])[O-]','[O]S(=O)(=O)O','[Mn+5]','[O]Cl','O=O','[O-]Br',\
+	'O=[Cr](=O)([O-])O[Cr](=O)(=O)[O-]','[Br]','[O-]I','3OM*', 'CC([O])=O','OBr','O=S(=O)([O-])OO',\
+	'[O-][I+3]([O-])([O-])[O-]','[Mn+2].[Mn+2].[O-2].[O-2]','NCl','BrBr','[O][Cl+][O-]','[O][N+](=O)[O-]','[I]','[O-]O','[O]C(=O)O',\
+	'[O]S(=O)(=O)OOS(=O)(=O)[O-]','[O]S(=O)[O-]','[O-][I+2]([O-])[O-]','[Fe+3]','O=[N+]=O','OI', 'O', '']
+	
+acti_methd=["UV light", "Heat", "Visible light", "Microwave", "Electricity", "Ultrasound", "Sunlight", "Infrared", "No energy input"]
+methd_tokens=["ul", "heat", "vl", "MW", "E", "US", "sul", "rl", ""]
 default_thred = [
     0.911749519,  # top1
     0.363675185,  # top2
@@ -208,6 +222,63 @@ st.set_page_config(
 with st.sidebar:
 	with st.expander("🛠️Specify prediction parameters"):
 		model_select=st.selectbox("Select model dimension",("256", "512"), 1)
+
+		st.subheader('💥Please select the ROSs that drive the pollutant degradation')
+		ros_selct=st.selectbox('What ROSs? If not sure, select "Unknown"', ('HO∙','¹O₂','O₃','SO₄∙⁻','O₂∙⁻','3DOM*','MnO₄⁻','HOCl','Fe(VI)',\
+		'Cl∙','ClO⁻','CO₃∙⁻','HFe(VI)','Cl₂','NO₂∙','Cl₂∙⁻','C₂H₃O₃∙','Cu(III)','C₃H₅O₂∙', \
+		'NO∙','Fe(V)','Mn(III)', 'Fe(IV)','HSO₄∙','Mn(V)','ClO∙','O₂','BrO⁻',\
+		'Cr₂O₇²⁻','Br∙','IO⁻','³OM*', 'C₂H₃O₂∙','HOBr','HSO₅⁻',\
+		'IO₄⁻','Mn₂O₂','HNCl','Br₂','ClO₂∙','NO₃∙','I∙','HO₂⁻','HCO₃∙',\
+		'S₂O₈∙⁻','SO₃∙⁻','IO₃⁻','Fe(III)','NO₂⁺','HOI', 'O', "Unkown"))
+		#st.write('You selected:', ros_selct)
+		#select = st.radio("Please specify the property or activity you want to predict", ('OH radical', 'SO4- radical', 'Koc', 'Solubility','pKd','pIC50','CCSM_H','CCSM_Na', 'Lipo','FreeSolv' ))
+		st.subheader('🧪Which precursors generate ROSs')
+		prec = st.text_input("Please enter the SMILES notation for the precursor(s), including the parent oxidant and any activator (if applicable), e.g. 'OO.[Fe+2]' for the fenton reagent H2O2/Fe2+, if not sure, leave this field blank", "")
+		#if prec !='':
+			#st.warning('Invalid chemical name or CAS number of precursors, please check it again or imput SMILES')
+			#st.stop()
+		
+		st.subheader("⚡What energy input")
+		methd_selct=st.selectbox("Please select the input energy for the ROSs generation",("UV light", "Heat", "Visible light", \
+			       "Microwave", "Electricity", "Ultrasound", "Sunlight", "Infrared", "No energy input"),8)
+		
+		st.subheader('🌡️Please input the reaction pH for pollutant degradation')
+		pH_value = st.text_input("Keep two decimal places","")
+	
+		
+	
+	# Display slider for general selection
+	#	pH_value = st.select_slider(
+	#	    'Select a value:',
+	#	    options=[round(x * 0.01, 2) for x in range(000, 1401)],
+	#	    value=st.session_state.value
+	#)
+		
+		# "+" and "-" buttons for fine-tuning
+	
+		st.subheader('⚖️Specify probability thresholds')
+		cols = st.columns(5)
+	
+		default_values = get_thred(ros_selct, methd_selct)
+		
+		thresholds = {}
+		for i in range(5):
+		    with cols[i]:
+		        thresholds[i] = st.number_input(
+		            label=f"top{i+1} threshold:",
+		            min_value=0.0,
+		            max_value=1.0,
+		            value=default_values[i],
+		            format="%.9f",
+		            step=1e-9,
+		            help=f"default: {default_values[i]:.9f}"
+		        )
+
+
+
+
+
+	
 	with st.expander("📞Contact developer"):
 		
 		st.markdown("📧 Email: [zhen.h.dai@outlook.com](mailto:zhen.h.dai@outlook.com)")
@@ -216,94 +287,22 @@ with st.sidebar:
 
 
 def run():
-	ros_name = ['HO∙','¹O₂','O₃','SO₄∙⁻','O₂∙⁻','3DOM*','MnO₄⁻','HOCl','Fe(VI)',\
-	'Cl∙','ClO⁻','CO₃∙⁻','HFe(VI)','Cl₂','NO₂∙','Cl₂∙⁻','C₂H₃O₃∙','Cu(III)','C₃H₅O₂∙', \
-	'NO∙','Fe(V)','Mn(III)', 'Fe(IV)','HSO₄∙','Mn(V)','ClO∙','O₂','BrO⁻',\
-	'Cr₂O₇²⁻','Br∙','IO⁻','³OM*', 'C₂H₃O₂∙','HOBr','HSO₅⁻',\
-	'IO₄⁻','Mn₂O₂','HNCl','Br₂','ClO₂∙','NO₃∙','I∙','HO₂⁻','HCO₃∙',\
-	'S₂O₈∙⁻','SO₃∙⁻','IO₃⁻','Fe(III)','NO₂⁺','HOI', 'O', "Unkown"]
-	ros_smis = ['[OH]','1O=O','O=[O+][O-]','[O]S(=O)(=O)[O-]','[O][O-]','3DOM*','O=[Mn](=O)(=O)[O-]','OCl','O=[Fe](=O)([O-])[O-]',\
-	'[Cl]','[O-]Cl','[O]C(=O)[O-]','O=[Fe](=O)([O-])O','ClCl','O=[N+][O-]','Cl[Cl-]','CC(=O)O[O]','[Cu+3]','CCC([O])=O', \
-	'[N+][O-]','O=[Fe]([O-])([O-])[O-]','[Mn+3]', '[O-][Fe]([O-])([O-])[O-]','[O]S(=O)(=O)O','[Mn+5]','[O]Cl','O=O','[O-]Br',\
-	'O=[Cr](=O)([O-])O[Cr](=O)(=O)[O-]','[Br]','[O-]I','3OM*', 'CC([O])=O','OBr','O=S(=O)([O-])OO',\
-	'[O-][I+3]([O-])([O-])[O-]','[Mn+2].[Mn+2].[O-2].[O-2]','NCl','BrBr','[O][Cl+][O-]','[O][N+](=O)[O-]','[I]','[O-]O','[O]C(=O)O',\
-	'[O]S(=O)(=O)OOS(=O)(=O)[O-]','[O]S(=O)[O-]','[O-][I+2]([O-])[O-]','[Fe+3]','O=[N+]=O','OI', 'O', '']
-	
-	acti_methd=["UV light", "Heat", "Visible light", "Microwave", "Electricity", "Ultrasound", "Sunlight", "Infrared", "No energy input"]
-	methd_tokens=["ul", "heat", "vl", "MW", "E", "US", "sul", "rl", ""]
-	
 	st.subheader('🔬What pollutant?')
 	default_mol = st.text_input("Please input the SMILES notation for the pollutant, e.g. 'c1ccccc1' for benzene", "c1ccccc1")
 	with st.expander("📌Show how to get SMILES of chemicals"):
 		st.write('You can get SMILES of any molecules from PubChem https://pubchem.ncbi.nlm.nih.gov/ by typing Chemical name or ACS number')
-
 	# # text input for manually input molecular SMILES
 	# molecule = st.text_input("molecular strcuture（SMILES）", default_smiles)
-	
 	# Ketcher  molecule editor
 	st.markdown(f"✍Or manually draw the target pollutant below:")
 	poll = st_ketcher(default_mol)
-	
 	# Showing molecule SMILES from editor
 	st.markdown(f"**current SMILES：** `{poll}`")
 
-	
-	
 	if poll =='':
 		st.warning('⚠️Provide at least one molecular compound.')
 		st.stop()
 	
-	st.subheader('💥Please select the ROSs that drive the pollutant degradation')
-	ros_selct=st.selectbox('What ROSs? If not sure, select "Unknown"', ('HO∙','¹O₂','O₃','SO₄∙⁻','O₂∙⁻','3DOM*','MnO₄⁻','HOCl','Fe(VI)',\
-	'Cl∙','ClO⁻','CO₃∙⁻','HFe(VI)','Cl₂','NO₂∙','Cl₂∙⁻','C₂H₃O₃∙','Cu(III)','C₃H₅O₂∙', \
-	'NO∙','Fe(V)','Mn(III)', 'Fe(IV)','HSO₄∙','Mn(V)','ClO∙','O₂','BrO⁻',\
-	'Cr₂O₇²⁻','Br∙','IO⁻','³OM*', 'C₂H₃O₂∙','HOBr','HSO₅⁻',\
-	'IO₄⁻','Mn₂O₂','HNCl','Br₂','ClO₂∙','NO₃∙','I∙','HO₂⁻','HCO₃∙',\
-	'S₂O₈∙⁻','SO₃∙⁻','IO₃⁻','Fe(III)','NO₂⁺','HOI', 'O', "Unkown"))
-	#st.write('You selected:', ros_selct)
-	#select = st.radio("Please specify the property or activity you want to predict", ('OH radical', 'SO4- radical', 'Koc', 'Solubility','pKd','pIC50','CCSM_H','CCSM_Na', 'Lipo','FreeSolv' ))
-	st.subheader('🧪Which precursors generate ROSs')
-	prec = st.text_input("Please enter the SMILES notation for the precursor(s), including the parent oxidant and any activator (if applicable), e.g. 'OO.[Fe+2]' for the fenton reagent H2O2/Fe2+, if not sure, leave this field blank", "")
-	#if prec !='':
-		#st.warning('Invalid chemical name or CAS number of precursors, please check it again or imput SMILES')
-		#st.stop()
-	
-	st.subheader("⚡What energy input")
-	methd_selct=st.selectbox("Please select the input energy for the ROSs generation",("UV light", "Heat", "Visible light", \
-		       "Microwave", "Electricity", "Ultrasound", "Sunlight", "Infrared", "No energy input"),8)
-	
-	st.subheader('🌡️Please input the reaction pH for pollutant degradation')
-	pH_value = st.text_input("Keep two decimal places","")
-
-	
-
-# Display slider for general selection
-#	pH_value = st.select_slider(
-#	    'Select a value:',
-#	    options=[round(x * 0.01, 2) for x in range(000, 1401)],
-#	    value=st.session_state.value
-#)
-	
-	# "+" and "-" buttons for fine-tuning
-
-	st.subheader('⚖️Specify probability thresholds')
-	cols = st.columns(5)
-
-	default_values = get_thred(ros_selct, methd_selct)
-	
-	thresholds = {}
-	for i in range(5):
-	    with cols[i]:
-	        thresholds[i] = st.number_input(
-	            label=f"top{i+1} threshold:",
-	            min_value=0.0,
-	            max_value=1.0,
-	            value=default_values[i],
-	            format="%.9f",
-	            step=1e-9,
-	            help=f"default: {default_values[i]:.9f}"
-	        )
-
 	col1, col2, col3, col4= st.columns([2,2,1,1])
 	ros_smi = ros_smis[ros_name.index(ros_selct)]
 	methd_token = methd_tokens[acti_methd.index(methd_selct)]
